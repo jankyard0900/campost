@@ -1,0 +1,2 @@
+class CampReview < ApplicationRecord
+end

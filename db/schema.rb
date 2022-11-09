@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_09_074703) do
+ActiveRecord::Schema.define(version: 2022_11_09_082319) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,44 @@ ActiveRecord::Schema.define(version: 2022_11_09_074703) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "areas", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "camp_reviews", force: :cascade do |t|
+    t.integer "camp_id", null: false
+    t.integer "customer_id", null: false
+    t.float "rate", null: false
+    t.string "title", null: false
+    t.text "review", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "camps", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "area_id", null: false
+    t.string "name", null: false
+    t.string "address", null: false
+    t.text "access_method", null: false
+    t.text "parking", null: false
+    t.text "vehicle", null: false
+    t.text "close_facilities", null: false
+    t.text "hot_spring", null: false
+    t.text "in_site_facilities", null: false
+    t.text "fee_information", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -64,6 +102,26 @@ ActiveRecord::Schema.define(version: 2022_11_09_074703) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "gear_reviews", force: :cascade do |t|
+    t.integer "gear_id", null: false
+    t.integer "customer_id", null: false
+    t.float "rate", null: false
+    t.string "title", null: false
+    t.text "review", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "gears", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "category_id", null: false
+    t.string "name", null: false
+    t.string "price", null: false
+    t.string "brand_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

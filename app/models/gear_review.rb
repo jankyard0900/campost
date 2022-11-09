@@ -1,0 +1,2 @@
+class GearReview < ApplicationRecord
+end
