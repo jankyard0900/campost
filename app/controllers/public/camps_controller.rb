@@ -2,6 +2,9 @@ class Public::CampsController < ApplicationController
   def new
   end
 
+  def create
+  end
+
   def index
   end
 
@@ -9,6 +12,12 @@ class Public::CampsController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+  end
+
+  def destroy
   end
 
   def search
