@@ -1,2 +1,13 @@
-<h1>Admin::Areas#edit</h1>
-<p>Find me in app/views/admin/areas/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h5 class='mx-5 my-5', style="background-color: #eee; width:220px; padding-left: 12px; margin-bottom: 40px;"><b>エリア編集</b></h5>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <%= render "admin/shared/error_messages", resource: @area %>
+    <%= form_with model: @area, url: admin_area_path do |f| %>
+      <span class="mr-5"><b><%= f.label :name, "エリア名" %></b></span>
+      <span class="mr-3"><%= f.text_field :name %></span>
+      <span class="mr-5"><%= f.submit "変更を保存する", class: 'btn btn-success' %></span>
+    <% end %>
+  </div>
+</div>
