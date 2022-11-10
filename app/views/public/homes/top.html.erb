@@ -1,2 +1,16 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <h1 class="text-center mb-5 mt-5">キャンプ場をみんなでつくろう！</h1>
+    <h4 class="text-center">
+      このサイトは、みんなでキャンプ場の情報を投稿し、共有できる。<br>
+      また、おすすめのキャンプギアがあれば投稿し、<br>みんなで共有できるサイトになっております。<br>
+      <b>このサイトにないキャンプ場をみんなで投稿しましょう！</b>
+    </p>
+  </div>
+  <div class="row d-flex justify-content-end">
+    <p>
+      <%= link_to new_customer_registration_path do %>新規会員登録<% end %>
+       することで利用することが出来ます。
+    </p>
+  </div>
+</div>
