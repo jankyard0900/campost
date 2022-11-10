@@ -1,2 +1,17 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<h4>マイページ</h4>
+<div>
+  <%= image_tag @customer.get_profile_image(100, 100) %>
+  <p><b>ニックネーム</b></p>
+  <p><%= @customer.name %></p>
+  <%= link_to "プロフィール編集", edit_customer_path(@customer.id), class: 'btn btn-success' %>
+</div>
+
+<!--会員のキャンプ場レビュー一覽-->
+<div>
+  <h5>レビューしたキャンプ場</h5>
+</div>
+
+<!--会員のキャンプギアレビュー一覽-->
+<div>
+  <h5>レビューしたキャンプギア</h5>
+</div>

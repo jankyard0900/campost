@@ -27,7 +27,7 @@
             <li><%= link_to "キャンプギア投稿", new_gear_path, class: "nav-link btn btn-outline-dark" %></li>
             <li><%= link_to "キャンプ場一覽", camps_path, class: "nav-link btn btn-outline-dark" %></li>
             <li><%= link_to "キャンプ場投稿", new_camp_path, class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "マイページ", my_page_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li><%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-outline-dark" %></li>
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-outline-dark" %></li>
           <!--ゲストログインしているとき-->
           <!--<#% elseif guest_customer_signed_in? %>

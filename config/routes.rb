@@ -28,11 +28,9 @@ Rails.application.routes.draw do
     end
     get 'camps/search'=>'camps#search', as: 'camp_search'
 
-    get 'customers/my_page'=>'customers#show',as: 'my_page'
-    get 'customers/infomation/edit'=>'customers#edit',as: 'edit_infomation'
-    patch 'customers/infomation'=>'customers#update',as: 'infomation'
-    get 'customers/unsubscribe'=>'customers#unsubscribe', as: 'unsubscribe'
-    patch 'customers/withdraw'=>'customers#withdraw', as: 'withdraw'
+    resources :customers, only: [:show, :edit, :update]
+    get 'customers/:id/unsubscribe'=>'customers#unsubscribe', as: 'unsubscribe'
+    patch 'customers/:id/withdraw'=>'customers#withdraw', as: 'withdraw'
 
     root :to =>"homes#top"
   end

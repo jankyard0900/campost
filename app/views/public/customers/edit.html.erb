@@ -1,2 +1,28 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<h5>プロフィール編集</h5>
+<%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
+<table class="table">
+  <% if @customer.errors.any? %>
+    <%= @customer.errors.count %>件のエラーが発生しました。
+    <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <tr>
+    <td><b>ニックネーム</b></td>
+    <td><%= f.text_field :name, class: 'form-control' %></td>
+  </tr>
+
+  <tr>
+    <td><b>プロフィール画像</b></td>
+    <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+  </tr>
+
+  <tr>
+    <td><%= f.submit "編集内容を保存", class: 'btn btn-success' %></td>
+    <td><%= link_to '退会する', unsubscribe_path, class: 'btn btn-danger' %></td>
+  </tr>
+</table>
+<% end %>

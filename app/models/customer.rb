@@ -4,6 +4,8 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :profile_image
+
   has_many :camps,        dependent: :destroy
   has_many :camp_reviews, dependent: :destroy
   has_many :gears,        dependent: :destroy
@@ -11,4 +13,14 @@ class Customer < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 1, maximum: 10 },
     format: {with:/\A[ぁ-んァ-ン一-龥]/,message: "は、ひらがな、カタカナ、漢字のどれかで入力して下さい"}
+  
+  def get_profile_image(width, height)
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  
 end
