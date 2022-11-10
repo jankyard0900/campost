@@ -1,3 +1,53 @@
-<div class="row">
-  
-</div>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <!--管理者がログインしているとき-->
+      <% if admin_signed_in? %>
+        <h2>Camposts</h2>
+      <% else %>
+        <%= link_to root_path, class: "nav-brand text-dark" do %>
+          <font size="6">Camposts</font>
+        <% end %>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <!--管理者がログインしているとき-->
+          <% if admin_signed_in? %>
+           <li><%= link_to "キャンプギア一覽", gears_path, class: "nav-link btn btn-outline-dark" %></li>
+           <li><%= link_to "キャンプ場一覽", camps_path, class: "nav-link btn btn-outline-dark" %></li>
+           <li><%= link_to "会員一覽", admin_customers_path, class: "nav-link btn btn-outline-dark" %></li>
+           <li><%= link_to "エリア・カテゴリ一覽", admin_tags_path, class: "nav-link btn btn-outline-dark" %></li>
+           <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-dark" %></li>
+          <!--会員がログインしているとき-->
+          <% elsif customer_signed_in? %>
+            <li><%= link_to "キャンプギア一覽", gears_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li><%= link_to "キャンプギア投稿", new_gear_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li><%= link_to "キャンプ場一覽", camps_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li><%= link_to "キャンプ場投稿", new_camp_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li><%= link_to "マイページ", my_page_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-outline-dark" %></li>
+          <!--ゲストログインしているとき-->
+          <!--<#% elseif guest_customer_signed_in? %>
+            <li><#%= link_to "キャンプギア一覽", gears_path, class: "btn btn-outline-dark" %></li>
+            <li><#%= link_to "キャンプ場一覽", camps_path, class: "btn btn-outline-dark" %></li>
+            <li><#%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %></li>-->
+          <!--ログインしてないとき-->
+          <% else %>
+            <li><%= link_to "新規会員登録", new_customer_registration_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li><%= link_to "ゲストログイン"%></li>
+            <li><%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-outline-dark" %></li>
+          <% end %>
+        </ul>
+        <!--検索窓-->
+        <ul class="navbar-nav">
+          <li class="nav-item ml-auto pr-3">
+            検索ボックス
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
