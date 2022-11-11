@@ -1,6 +1,38 @@
-<h1>Admin::Customers#index</h1>
-<p>Find me in app/views/admin/customers/index.html.erb</p>
-
- <li>
-  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
- </li>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <h5 class="ml-5 mt-3", style="background-color: #eee; width:150px; padding-left: 12px; margin-bottom: 20px;"><b>会員一覧</b></h5>
+  </div>
+  <div class="row">
+    <table class="table table-sm">
+      <thead class="table-info">
+        <th class="text-center">会員ID</th>
+        <th class="text-center">ニックネーム</th>
+        <th class="text-center">メールアドレス</th>
+        <th class="text-center">ステータス</th>
+      </thead>
+      <% @customers.each do |customer| %>
+      <tbody>
+        <tr>
+          <td class="text-center"><%= customer.id %></td>
+          <td class="text-center">
+            <%= link_to admin_customer_path(customer.id), class: 'text-dark' do %>
+              <u><%= customer.name %></u>
+            <% end %>
+          </td>
+          <td class="text-center"><%= customer.email %></td>
+          <% if customer.is_active == true %>
+            <td class="text-success text-center">有効</td>
+          <% else %>
+            <td class="text-danger text-center">退会</td>
+          <% end %>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <%= paginate @customers %>
+    </div>
+  </div>
+</div>
