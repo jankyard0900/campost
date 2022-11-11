@@ -1,2 +1,61 @@
-<h1>Public::Camps#new</h1>
-<p>Find me in app/views/public/camps/new.html.erb</p>
+<h5>キャンプ場情報投稿</h5>
+<%= form_with model: @camp, url: camps_path, method: :patch do |f| %>
+<table>
+  <% if @camp.errors.any? %>
+    <%= @camp.errors.count %>件のエラーが発生しました。
+    <ul>
+      <% @camp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <tr>
+    <td><b><%= f.label :camp_images, "キャンプ場の画像" %></b></td>
+    <td><%= f.file_field :camp_images, multiple: true, accept: "image/*" %></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :name, "キャンプ場名" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :address, "住所" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :area_id, "エリア名" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :access_method, "アクセス案内" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :parking, "駐車場" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :vehicle, "乗り入れ可能車両" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :close_facilities, "近隣施設" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :hot_spring, "近隣の温泉" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :in_site_facilities, "場内施設" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :fee_information, "料金情報" %></b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><%= f.submit "キャンプ場投稿", class: 'btn btn-success' %></td>
+  </tr>
+</table>
+<% end %>
