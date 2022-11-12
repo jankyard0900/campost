@@ -13,15 +13,17 @@
   <body>
     <%= render 'layouts/header' %>
 
-    <main>
-      <%= notice %>
-      <%= yield %>
+    <main style="height: 80vh;">
+      <div class="top-bg">
+        <%= notice %>
+        <%= yield %>
+      </div>
     </main>
 
-    <footer class="footer fixed-bottom">
+    <footer class="footer fixed-bottom bg-light">
       <div class='container py-3'>
       	<div class='row my-auto d-flex justify-content-center'>
-        	<p class="text-light">©NaganoCake</p>
+        	<p>©NaganoCake</p>
         </div>
       </div>
     </footer>
