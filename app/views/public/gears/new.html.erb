@@ -1,2 +1,37 @@
-<h1>Public::Gears#new</h1>
-<p>Find me in app/views/public/gears/new.html.erb</p>
+<h5>キャンプギア情報投稿</h5>
+<%= form_with model: @gear, url: gears_path, method: :post do |f| %>
+<table>
+  <% if @gear.errors.any? %>
+    <%= @gear.errors.count %>件のエラーが発生しました。
+    <ul>
+      <% @gear.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <tr>
+    <td><b><%= f.label :gear_images, "キャンプギアの画像" %></b></td>
+    <td><%= f.file_field :gear_images, multiple: true, accept: "image/*" %></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :name, "キャンプギア名" %></b></td>
+    <td><%= f.text_field :name, class: "form-control", placeholder: "キャンプギア名" %></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :price, "値段" %></b></td>
+    <td><%= f.text_field :price, class: "form-control", placeholder: "15000" %>　円</td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :brand_name, "ブランド名" %></b></td>
+    <td><%= f.text_field :brand_name, class: "form-control", placeholder: "snowpeak" %></td>
+  </tr>
+  <tr>
+    <td><b><%= f.label :category_id, "カテゴリ名" %></b></td>
+    <td><%= f.collection_select :category_id, @categories, :id, :name, include_blank: '選択してください', required: true %></td>
+  </tr>
+  <tr>
+    <td><%= f.submit "キャンプギア投稿", class: 'btn btn-success' %></td>
+  </tr>
+</table>
+<% end %>
