@@ -1,2 +1,67 @@
-<h1>Public::Camps#show</h1>
-<p>Find me in app/views/public/camps/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>キャンプ場情報</h4>
+    </div>
+    <div class="col-md-6">
+    <% if (@camp.customer == current_customer) || admin_signed_in? %>
+      <%= link_to "編集する", edit_camp_path(@camp.id), class: 'btn btn-success' %>
+    <% end %>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <% @camp.camp_images.each do |image| %>
+      <div class="my-5">
+        <%= image_tag image, size:'400x300' %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <table>
+        <tr>
+          <td><%= image_tag @camp.customer.get_profile_image(100,100) %></td>
+          <td><%= @camp.customer.name %>さん</td>
+        </tr>
+        <tr>
+          <td><b>キャンプ場名</b></td>
+          <td><%= @camp.name %></td>
+        </tr>
+        <tr>
+          <td><b>住所</b></td>
+          <td><%= @camp.address %></td>
+        </tr>
+        <tr>
+          <td><b>アクセス案内</b></td>
+          <td><%= @camp.access_method %></td>
+        </tr>
+        <tr>
+          <td><b>駐車場</b></td>
+          <td><%= @camp.parking %></td>
+        </tr>
+        <tr>
+          <td><b>乗り入れ可能車両</b></td>
+          <td><%= @camp.vehicle %></td>
+        </tr>
+        <tr>
+          <td><b>近隣施設</b></td>
+          <td><%= @camp.close_facilities %></td>
+        </tr>
+        <tr>
+          <td><b>場内施設</b></td>
+          <td><%= @camp.in_site_facilities %></td>
+        </tr>
+        <tr>
+          <td><b>近隣の温泉</b></td>
+          <td><%= @camp.hot_spring %></td>
+        </tr>
+        <tr>
+          <td><b>料金情報</b></td>
+          <td><%= @camp.fee_information %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

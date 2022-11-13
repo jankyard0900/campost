@@ -26,9 +26,18 @@ class Public::CampsController < ApplicationController
 
   def edit
     @camp = Camp.find(params[:id])
+    @areas = Area.all
   end
 
   def update
+    @camp = Camp.find(params[:id])
+    if @camp.update(camp_params)
+      flash[:success] = "投稿を変更しました。"
+      redirect_to camp_path(@camp.id)
+    else
+      @areas = Area.all
+      render :edit
+    end
   end
 
   def destroy
@@ -37,6 +46,7 @@ class Public::CampsController < ApplicationController
       flash[:success] = "投稿を削除しました。"
       redirect_to camps_path
     else
+      @areas = Area.all
       render :edit
     end
   end
