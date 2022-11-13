@@ -15,7 +15,12 @@
           <div class="col-lg-4">
             <div class="d-flex flex-column">
               <!--画像の一枚目投稿予定-->
-              <h5 style="margin-bottom: 20px; margin-top: 20px;"><%= camp.name %></h5>
+              <%= link_to camp_path(camp.id) do %>
+                <% camp.camp_images.first(1).each do |image| %>
+                  <%= image_tag image, size:'200x160' %>
+                <% end %>
+              <% end %>
+              <h5 style="margin-bottom: 20px; margin-top: 20px;"><b><%= camp.name %></b></h5>
               <!--レビューの平均☆表示予定-->
             </div>
           </div>

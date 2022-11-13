@@ -15,6 +15,11 @@
           <div class="col-lg-4">
             <div class="d-flex flex-column">
               <!--画像の一枚目投稿予定-->
+              <%= link_to gear_path(gear.id) do %>
+                <% gear.gear_images.first(1).each do |image| %>
+                  <%= image_tag image, size:'200x160' %>
+                <% end %>
+              <% end %>
               <h5 style="margin-bottom: 20px; margin-top: 20px;"><%= gear.name %></h5>
               <!--レビューの平均☆表示予定-->
             </div>
