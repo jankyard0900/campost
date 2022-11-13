@@ -1,2 +1,47 @@
-<h1>Public::Gears#show</h1>
-<p>Find me in app/views/public/gears/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>キャンプ場情報</h4>
+    </div>
+    <div class="col-md-6">
+    <% if (@gear.customer == current_customer) || admin_signed_in? %>
+      <%= link_to "編集する", edit_gear_path(@gear.id), class: 'btn btn-success' %>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <% @gear.gear_images.each do |image| %>
+      <div class="my-5">
+        <%= image_tag image, size:'400x300' %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <table>
+        <tr>
+          <td><%= image_tag @gear.customer.get_profile_image(100,100) %></td>
+          <td><%= @gear.customer.name %>さん</td>
+        </tr>
+        <tr>
+          <td><b>キャンプギア名</b></td>
+          <td><%= @gear.name %></td>
+        </tr>
+        <tr>
+          <td><b>値段</b></td>
+          <td><%= @gear.price %>円</td>
+        </tr>
+        <tr>
+          <td><b>ブランド名</b></td>
+          <td><%= @gear.brand_name %></td>
+        </tr>
+        <tr>
+          <td><b>カテゴリ名</b></td>
+          <td><%= @gear.category.name %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

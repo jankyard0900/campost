@@ -21,15 +21,34 @@ class Public::GearsController < ApplicationController
   end
 
   def show
+    @gear = Gear.find(params[:id])
   end
 
   def edit
+    @gear = Gear.find(params[:id])
+    @categories = Category.all
   end
 
   def update
+    @gear = Gear.find(params[:id])
+    if @gear.update(gear_params)
+      flash[:success] = "投稿を変更しました。"
+      redirect_to gear_path(@gear.id)
+    else
+      @categories = Category.all
+      render :edit
+    end
   end
 
   def destroy
+    @gear = Gear.find(params[:id])
+    if @gear.destroy
+      flash[:success] = "投稿を削除しました。"
+      redirect_to gears_path
+    else
+      @categories = Category.all
+      render :edit
+    end
   end
 
   def search

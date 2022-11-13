@@ -1,4 +1,4 @@
-<h5>キャンプ場情報投稿</h5>
+<h5>キャンプ場情報編集</h5>
 <%= form_with model: @camp, url: camp_path, method: :patch do |f| %>
 <table>
   <% if @camp.errors.any? %>
@@ -57,7 +57,7 @@
   <tr>
     <td><%= f.submit "変更を保存", class: 'btn btn-success' %></td>
     <% if (@camp.customer == current_customer) || admin_signed_in? %>
-    <td><%= link_to "キャンプ場情報削除", camp_path(@camp.id), method: :delete, class: "btn btn-danger" %></td>
+    <td><%= link_to "キャンプ場情報削除", camp_path(@camp.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %></td>
     <% end %>
   </tr>
 </table>
