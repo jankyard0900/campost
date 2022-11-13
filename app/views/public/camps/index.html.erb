@@ -1,2 +1,29 @@
-<h1>Public::Camps#index</h1>
-<p>Find me in app/views/public/camps/index.html.erb</p>
+<div class='container mt-5 h-75'>
+  <div class='row h-100'>
+    <div class='col-md-2'>
+      エリア検索機能
+    </div>
+
+    <div class='col-md-10'>
+      <div class = "new-arrival">
+        <div style="display:flex; flex-wrap:wrap;">
+          <h3><strong>キャンプ場一覧</strong></h3>
+          <div class="mt-2"><strong>（全<%= @camps.count%>件）</strong></div>
+        </div>
+        <div class = "new-arrival-contents" style="display:flex; flex-wrap:wrap;">
+          <% @camps.each do |camp| %>
+          <div class="col-lg-4">
+            <div class="d-flex flex-column">
+              <h5 style="margin-bottom: 20px; margin-top: 20px;"><%= camp.name %></h5>
+            </div>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <%= paginate @camps %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

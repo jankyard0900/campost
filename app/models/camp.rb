@@ -2,7 +2,7 @@ class Camp < ApplicationRecord
   has_many_attached :camp_images
 
   belongs_to :area
-  belongs_to :camp
+  belongs_to :customer
   has_many :camp_reviews, dependent: :destroy
 
   validates :camp_images,        presence: true

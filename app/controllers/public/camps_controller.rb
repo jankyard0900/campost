@@ -1,14 +1,17 @@
 class Public::CampsController < ApplicationController
   def new
     @camp = Camp.new
+    @areas = Area.all
   end
 
   def create
     @camp = Camp.new(camp_params)
+    @camp.customer_id = current_customer.id
     if @camp.save
       flash[:success] = "キャンプ場が作成できました！"
       redirect_to camps_path
     else
+      @areas = Area.all
       render :new
     end
   end
@@ -18,6 +21,7 @@ class Public::CampsController < ApplicationController
   end
 
   def show
+    @camp = Camp.find(params[:id])
   end
 
   def edit
