@@ -62,6 +62,7 @@
           <td><%= @camp.fee_information %></td>
         </tr>
       </table>
+      <%= link_to "キャンプ場レビューを書く >", new_camp_camp_review_path(@camp.id), class: "btn btn-secondary" %>
     </div>
   </div>
 </div>

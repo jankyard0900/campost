@@ -31,6 +31,12 @@ class Public::CampsController < ApplicationController
 
   def update
     @camp = Camp.find(params[:id])
+    if params[:camp][:image_ids]
+      params[:post][:image_ids].each do |image_id|
+        @image = @camp.camp_images.find(image_id)
+        @image.purge
+      end
+    end
     if @camp.update(camp_params)
       flash[:success] = "投稿を変更しました。"
       redirect_to camp_path(@camp.id)
