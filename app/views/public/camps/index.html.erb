@@ -23,7 +23,7 @@
               <h5 style="margin-bottom: 20px; margin-top: 20px;"><b><%= camp.name %></b></h5>
               <!--レビューの平均☆表示-->
               <div id="star-rate<%= camp.id%>"></div>
-              <p>レビュー<b><%= camp.camp_reviews.count %>件</b></p>
+              <p>(<b><%= camp.camp_reviews.count %>件</b>)</p>
               <script>
               $(document).on('turbolinks:load', function() {
                 $('#star-rate<%= camp.id %>').empty();
@@ -31,7 +31,7 @@
                   size      : 36,
                   starOff   : '<%= asset_path('star-off.png') %>',
                   starOn    : '<%= asset_path('star-on.png') %>',
-                  starHalf  : '<%=asset_path('star-half.png') %>',
+                  starHalf  : '<%= asset_path('star-half.png') %>',
                   half      : true,
                   readOnly  : true,
                   score: '<%= camp.camp_reviews.average(:rate).to_f.round(1) %>',
