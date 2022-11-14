@@ -3,6 +3,14 @@
     <h4><%= @camp.name %>をレビュー</h4>
   </div>
   <%= form_with model: [@camp, @camp_review], url: camp_camp_reviews_path(@camp), method: :post do |f| %>
+    <% if @camp_review.errors.any? %>
+      <%= @camp_review.errors.count %>件のエラーが発生しました。
+      <ul>
+        <% @camp_review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <div>
       <p><b><%= @camp.name %></b></p>
     </div>

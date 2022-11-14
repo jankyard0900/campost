@@ -1,2 +1,55 @@
-<h1>Public::GearReviews#new</h1>
-<p>Find me in app/views/public/gear_reviews/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h4><%= @gear.name %>をレビュー</h4>
+  </div>
+  <%= form_with model: [@gear, @gear_review], url: gear_gear_reviews_path(@gear), method: :post do |f| %>
+    <% if @gear_review.errors.any? %>
+      <%= @gear_review.errors.count %>件のエラーが発生しました。
+      <ul>
+        <% @gear_review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <div>
+      <p><b><%= @gear.name %></b></p>
+    </div>
+    <hr>
+    <div class="form-group row" id="star">
+      <%= f.label :rate, "総合評価", class:'col-md-3 col-form-label' %>
+      <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
+    </div>
+    <hr>
+    <div>
+      <p><b>キャンプギアの画像を追加する</b><br>※あれば写真を投稿してください</p>
+      <%= f.file_field :review_gear_images, multiple: true, accept: "image/*" %>
+    </div>
+    <hr>
+    <div>
+      <b><%= f.label :title, "レビュータイトル" %></b>
+      <%= f.text_field :title, class: "form-control", placeholder: "伝えたいこと！" %>
+    </div>
+    <hr>
+    <div>
+      <b><%= f.label :review, "レビュー" %></b>
+      <%= f.text_area :review, class: "form-control", placeholder: "「良かったこと」または「悪かったこと」" %>
+    </div>
+    <div>
+      <%= f.submit "レビュー投稿", class: "btn btn-warning" %>
+    </div>
+
+    <script>
+    $(document).on('turbolinks:load', function() {
+      $('#star').empty();
+      $('#star').raty({
+        size     : 36,
+        starOff  : '<%= asset_path('star-off.png') %>',
+        starOn   : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%=asset_path('star-half.png') %>',
+        scoreName: 'gear_review[rate]',
+        half: true,
+      });
+    });
+    </script>
+  <% end %>
+</div>

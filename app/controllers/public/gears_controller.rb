@@ -22,6 +22,7 @@ class Public::GearsController < ApplicationController
 
   def show
     @gear = Gear.find(params[:id])
+    @gear_reviews = @gear.gear_reviews
   end
 
   def edit
