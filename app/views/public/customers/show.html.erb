@@ -9,9 +9,81 @@
 <!--会員のキャンプ場レビュー一覽-->
 <div>
   <h5>レビューしたキャンプ場</h5>
+  <table>
+  <% @camp_reviews.each do |review| %>
+    <tr>
+      <td>
+        <%= link_to camp_path(review.camp.id), class: 'text-dark' do %>
+          <u><%= review.camp.name %></u>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="star-rate<%= review.id%>"></div>
+      </td>
+      <script>
+      $(document).on('turbolinks:load', function() {
+        $('#star-rate<%= review.id %>').empty();
+        $('#star-rate<%= review.id%>').raty({
+          size      : 36,
+          starOff   : '<%= asset_path('star-off.png') %>',
+          starOn    : '<%= asset_path('star-on.png') %>',
+          starHalf  : '<%= asset_path('star-half.png') %>',
+          half      : true,
+          readOnly  : true,
+          score: '<%= review.rate %>',
+        });
+      });
+      </script>
+    </tr>
+    <tr>
+      <td><b><%= review.title %></b></td>
+    </tr>
+    <tr>
+      <td><%= review.review %></td>
+    </tr>
+  <% end %>
+  </table>
 </div>
 
 <!--会員のキャンプギアレビュー一覽-->
 <div>
   <h5>レビューしたキャンプギア</h5>
+  <table>
+  <% @gear_reviews.each do |review| %>
+    <tr>
+      <td>
+        <%= link_to gear_path(review.gear.id), class: 'text-dark' do %>
+          <u><%= review.gear.name %></u>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="star-rate<%= review.id%>"></div>
+      </td>
+      <script>
+      $(document).on('turbolinks:load', function() {
+        $('#star-rate<%= review.id %>').empty();
+        $('#star-rate<%= review.id%>').raty({
+          size      : 36,
+          starOff   : '<%= asset_path('star-off.png') %>',
+          starOn    : '<%= asset_path('star-on.png') %>',
+          starHalf  : '<%= asset_path('star-half.png') %>',
+          half      : true,
+          readOnly  : true,
+          score: '<%= review.rate %>',
+        });
+      });
+      </script>
+    </tr>
+    <tr>
+      <td><b><%= review.title %></b></td>
+    </tr>
+    <tr>
+      <td><%= review.review %></td>
+    </tr>
+  <% end %>
+  </table>
 </div>
