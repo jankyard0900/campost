@@ -15,8 +15,8 @@
       <p><b><%= @camp.name %></b></p>
     </div>
     <hr>
-    <div class="form-group row" id="star">
       <%= f.label :rate, "総合評価", class:'col-md-3 col-form-label' %>
+    <div class="form-group row" id="star">
       <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
     </div>
     <hr>

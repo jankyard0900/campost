@@ -15,4 +15,6 @@ class Camp < ApplicationRecord
   validates :hot_spring,         presence: true
   validates :in_site_facilities, presence: true
   validates :fee_information,    presence: true
+
+  scope :latest, -> {order(created_at: :desc)}
 end

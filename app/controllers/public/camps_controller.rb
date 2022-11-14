@@ -17,7 +17,14 @@ class Public::CampsController < ApplicationController
   end
 
   def index
-    @camps = Camp.page(params[:page]).per(6)
+    @camps_all = Camp.all
+    if params[:latest]
+      @camps = Camp.latest.page(params[:page]).per(6)
+    elsif params[:star_count]
+      @camps = Camp.left_joins(:camp_reviews).group(:id).order("AVG(camp_reviews.rate) desc").page(params[:page]).per(6)
+    else
+      @camps = Camp.page(params[:page]).per(6)
+    end
   end
 
   def show
