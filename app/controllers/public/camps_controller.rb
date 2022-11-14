@@ -22,6 +22,7 @@ class Public::CampsController < ApplicationController
 
   def show
     @camp = Camp.find(params[:id])
+    @camp_reviews = @camp.camp_reviews
   end
 
   def edit

@@ -1,2 +1,47 @@
-<h1>Public::CampReviews#new</h1>
-<p>Find me in app/views/public/camp_reviews/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h4><%= @camp.name %>をレビュー</h4>
+  </div>
+  <%= form_with model: [@camp, @camp_review], url: camp_camp_reviews_path(@camp), method: :post do |f| %>
+    <div>
+      <p><b><%= @camp.name %></b></p>
+    </div>
+    <hr>
+    <div class="form-group row" id="star">
+      <%= f.label :rate, "総合評価", class:'col-md-3 col-form-label' %>
+      <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
+    </div>
+    <hr>
+    <div>
+      <p><b>キャンプ場の画像を追加する</b><br>※あれば写真を投稿してください</p>
+      <%= f.file_field :review_camp_images, multiple: true, accept: "image/*" %>
+    </div>
+    <hr>
+    <div>
+      <b><%= f.label :title, "レビュータイトル" %></b>
+      <%= f.text_field :title, class: "form-control", placeholder: "伝えたいこと！" %>
+    </div>
+    <hr>
+    <div>
+      <b><%= f.label :review, "レビュー" %></b>
+      <%= f.text_area :review, class: "form-control", placeholder: "「良かったこと」または「悪かったこと」" %>
+    </div>
+    <div>
+      <%= f.submit "レビュー投稿", class: "btn btn-warning" %>
+    </div>
+
+    <script>
+    $(document).on('turbolinks:load', function() {
+      $('#star').empty();
+      $('#star').raty({
+        size     : 36,
+        starOff  : '<%= asset_path('star-off.png') %>',
+        starOn   : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%=asset_path('star-half.png') %>',
+        scoreName: 'camp_review[rate]',
+        half: true,
+      });
+    });
+    </script>
+  <% end %>
+</div>
