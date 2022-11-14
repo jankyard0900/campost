@@ -63,6 +63,57 @@
         </tr>
       </table>
       <%= link_to "キャンプ場レビューを書く >", new_camp_camp_review_path(@camp.id), class: "btn btn-secondary" %>
+      <h3>レビュー一覽</h3>
+      <% @camp_reviews.each do |review| %>
+      <table>
+        <tr>
+          <td>
+            <%= image_tag review.customer.get_profile_image(100, 100) %>
+            <b><%= review.customer.name %></b>さん
+          </td>
+          <td>
+            <% if (review.customer == current_customer) || admin_signed_in? %>
+              <%= link_to "削除", camp_camp_review_path(@camp.id, review.id), method: :delete, class: 'btn btn-danger' %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div id="star-rate<%= review.id%>"></div>
+            <script>
+            $(document).on('turbolinks:load', function() {
+              $('#star-rate<%= review.id %>').empty();
+              $('#star-rate<%= review.id%>').raty({
+                size      : 36,
+                starOff   : '<%= asset_path('star-off.png') %>',
+                starOn    : '<%= asset_path('star-on.png') %>',
+                starHalf  : '<%=asset_path('star-half.png') %>',
+                half      : true,
+                readOnly  : true,
+                score: <%= review.rate %>,
+              });
+            });
+            </script>
+          </td>
+        </tr>
+        <tr>
+          <td><b><%= review.title %></b></td>
+        </tr>
+        <tr>
+          <td><%= review.review %></td>
+        </tr>
+        <!--↓もし画像があれば横並びに表示する-->
+        <% if review.review_camp_images.attached? %>
+        <tr>
+          <td>
+          <% review.review_camp_images.each do |image| %>
+            <%= image_tag image, size:'100x100' %>
+          <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <% end %>
     </div>
   </div>
 </div>
