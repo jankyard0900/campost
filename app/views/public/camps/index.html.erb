@@ -14,14 +14,30 @@
           <% @camps.each do |camp| %>
           <div class="col-lg-4">
             <div class="d-flex flex-column">
-              <!--画像の一枚目投稿予定-->
+              <!--投稿画像の一枚目表示-->
               <%= link_to camp_path(camp.id) do %>
                 <% camp.camp_images.first(1).each do |image| %>
                   <%= image_tag image, size:'200x160' %>
                 <% end %>
               <% end %>
               <h5 style="margin-bottom: 20px; margin-top: 20px;"><b><%= camp.name %></b></h5>
-              <!--レビューの平均☆表示予定-->
+              <!--レビューの平均☆表示-->
+              <div id="star-rate<%= camp.id%>"></div>
+              <p>レビュー<b><%= camp.camp_reviews.count %>件</b></p>
+              <script>
+              $(document).on('turbolinks:load', function() {
+                $('#star-rate<%= camp.id %>').empty();
+                $('#star-rate<%= camp.id%>').raty({
+                  size      : 36,
+                  starOff   : '<%= asset_path('star-off.png') %>',
+                  starOn    : '<%= asset_path('star-on.png') %>',
+                  starHalf  : '<%=asset_path('star-half.png') %>',
+                  half      : true,
+                  readOnly  : true,
+                  score: '<%= camp.camp_reviews.average(:rate).to_f.round(1) %>',
+                });
+              });
+              </script>
             </div>
           </div>
           <% end %>
