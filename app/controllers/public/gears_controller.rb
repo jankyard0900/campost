@@ -17,6 +17,7 @@ class Public::GearsController < ApplicationController
   end
 
   def index
+    @categories = Category.all
     @gears_all = Gear.all
     if params[:latest]
       @gears = Gear.latest.page(params[:page]).per(6)
@@ -60,6 +61,11 @@ class Public::GearsController < ApplicationController
   end
 
   def search
+    @categories = Category.all
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @category_gears = @category.gears.page(params[:page]).per(6)
+    end
   end
 
   private

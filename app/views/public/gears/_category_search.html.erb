@@ -1,0 +1,12 @@
+<div class="border border-dark text-center">
+  <b>カテゴリ検索</b>
+</div>
+<div class="border border-dark">
+  <% categories.each do |category| %>
+    <p>
+      <%= link_to gear_search_path(category_id: category.id) do %>
+        <%= category.name %>
+      <% end %>
+    </p>
+  <% end %>
+</div>
