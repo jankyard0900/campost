@@ -9,7 +9,7 @@ class Public::GearsController < ApplicationController
     @gear.customer_id = current_customer.id
     if @gear.save
       flash[:success] = "キャンプギアが作成できました！"
-      redirect_to gears_path
+      redirect_to gear_path(@gear.id)
     else
       @categories = Category.all
       render :new
