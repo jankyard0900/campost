@@ -64,7 +64,17 @@ class Public::GearsController < ApplicationController
     @categories = Category.all
     if params[:category_id]
       @category = Category.find(params[:category_id])
-      @category_gears = @category.gears.page(params[:page]).per(6)
+      @category_gears = @category.gears
+      @gears_count = @category.gears.count
+    else
+      redirect_to gears_path
+    end
+    if params[:latest]
+      @category_gears = @category_gears.latest.page(params[:page]).per(6)
+    elsif params[:star_count]
+      @category_gears = @category_gears.left_joins(:gear_reviews).group(:id).order("AVG(gear_reviews.rate) desc").page(params[:page]).per(6)
+    else
+      @category_gears = @category_gears.page(params[:page]).per(6)
     end
   end
 

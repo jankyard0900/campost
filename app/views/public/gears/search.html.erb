@@ -8,11 +8,11 @@
     <div class='col-md-10'>
         <div>
           <h3><strong><%= @category.name %>のキャンプギア一覧</strong></h3>
-          <div class="mt-2"><strong>（全<%= @category_gears.count%>件）</strong></div>
+          <div class="mt-2"><strong>（全<%= @gears_count %>件）</strong></div>
           並び替え機能
           <p>
-            <%= link_to '新しい順', gear_search_path(latest: "新着順") %>
-            | <%= link_to '評価の高い順', gear_search_path(star_count: "評価の高い順") %>
+            <%= link_to '新しい順', gear_search_path(category_id: @category.id, latest: "新着順") %>
+            | <%= link_to '評価の高い順', gear_search_path(category_id: @category.id, star_count: "評価の高い順") %>
           </p>
         </div>
         <div class = "contents" style="display:flex; flex-wrap:wrap;">
