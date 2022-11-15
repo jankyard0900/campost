@@ -16,6 +16,14 @@ class Public::SearchesController < ApplicationController
       end
     else
       @gears = Gear.looks(params[:word]).page(params[:page]).per(6)
+      if params[:latest]
+        @gears = @gears.latest.page(params[:page]).per(6)
+      elsif params[:star_count]
+        @gears_count = @gears.count
+        @gears = @gears.left_joins(:gear_reviews).group(:id).order("AVG(gear_reviews.rate) desc").page(params[:page]).per(6)
+      else
+        @gears = @gears.page(params[:page]).per(6)
+      end
     end
   end
 end
