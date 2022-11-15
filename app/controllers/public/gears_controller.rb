@@ -17,7 +17,14 @@ class Public::GearsController < ApplicationController
   end
 
   def index
-    @gears = Gear.page(params[:page]).per(6)
+    @gears_all = Gear.all
+    if params[:latest]
+      @gears = Gear.latest.page(params[:page]).per(6)
+    elsif params[:star_count]
+      @gears = Gear.left_joins(:gear_reviews).group(:id).order("AVG(gear_reviews.rate) desc").page(params[:page]).per(6)
+    else
+      @gears = Gear.page(params[:page]).per(6)
+    end
   end
 
   def show

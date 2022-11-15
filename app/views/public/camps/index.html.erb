@@ -9,8 +9,8 @@
         <h3><strong>キャンプ場一覧</strong></h3>
         <div class="mt-2"><strong>（全<%= @camps_all.count%>件）</strong></div>
         <p>
-          <%= link_to '新しい順', camps_path(latest: "true") %>
-          | <%= link_to '評価の高い順', camps_path(star_count: "true") %>
+          <%= link_to '新しい順', camps_path(latest: "新着順") %>
+          | <%= link_to '評価の高い順', camps_path(star_count: "評価の高い順") %>
         </p>
       </div>
       <div class = "contents" style="display:flex; flex-wrap:wrap;">

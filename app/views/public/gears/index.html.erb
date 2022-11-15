@@ -5,12 +5,15 @@
     </div>
 
     <div class='col-md-10'>
-      <div class = "new-arrival">
-        <div style="display:flex; flex-wrap:wrap;">
+        <div>
           <h3><strong>キャンプギア一覧</strong></h3>
-          <div class="mt-2"><strong>（全<%= @gears.count%>件）</strong></div>
+          <div class="mt-2"><strong>（全<%= @gears_all.count%>件）</strong></div>
+          <p>
+            <%= link_to '新しい順', gears_path(latest: "新着順") %>
+            | <%= link_to '評価の高い順', gears_path(star_count: "評価の高い順") %>
+          </p>
         </div>
-        <div class = "new-arrival-contents" style="display:flex; flex-wrap:wrap;">
+        <div class = "contents" style="display:flex; flex-wrap:wrap;">
           <% @gears.each do |gear| %>
           <div class="col-lg-4">
             <div class="d-flex flex-column">

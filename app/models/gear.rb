@@ -8,4 +8,6 @@ class Gear < ApplicationRecord
   validates :gear_images, presence: true
   validates :name,        presence: true, uniqueness: true
   validates :price,       presence: true
+
+  scope :latest, -> {order(created_at: :desc)}
 end

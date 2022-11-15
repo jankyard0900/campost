@@ -73,7 +73,7 @@
           </td>
           <td>
             <% if (review.customer == current_customer) || admin_signed_in? %>
-              <%= link_to "削除", camp_camp_review_path(@camp.id, review.id), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？"  %>
+              <%= link_to "削除", camp_camp_review_path(@camp.id, review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
             <% end %>
           </td>
         </tr>
