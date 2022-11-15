@@ -10,12 +10,11 @@
         <div class='col-md-10'>
           <div>
             <h3><strong><%= @word %>の検索結果</strong></h3>
-            <div class="mt-2"><strong>（全<%= @camps.count%>件）</strong></div>
-            <!--並び替え機能-->
-            <!--<p>-->
-            <!--  <%#= link_to '新しい順', camps_path(latest: "新着順") %>-->
-            <!--  | <%#= link_to '評価の高い順', camps_path(star_count: "評価の高い順") %>-->
-            <!--</p>-->
+            <div class="mt-2"><strong>（全<%= @camps_count.nil? ? @camps.count : @camps_count %>件）</strong></div>
+            <p>
+              <%= link_to '新しい順', search_path(word: params[:word], range: params[:range], latest: "新着順") %>
+              | <%= link_to '評価の高い順', search_path(word: params[:word], range: params[:range], star_count: "評価の高い順") %>
+            </p>
           </div>
 
           <div class = "contents" style="display:flex; flex-wrap:wrap;">
@@ -73,11 +72,10 @@
             <div>
               <h3><strong><%= @word %>の検索結果</strong></h3>
               <div class="mt-2"><strong>（全<%= @gears.count%>件）</strong></div>
-              <!--並び替え機能-->
-              <!--<p>-->
-              <!--  <%#= link_to '新しい順', gears_path(latest: "新着順") %>-->
-              <!--  | <%#= link_to '評価の高い順', gears_path(star_count: "評価の高い順") %>-->
-              <!--</p>-->
+              <p>
+                <%= link_to '新しい順', gears_path(latest: "新着順") %>
+                | <%= link_to '評価の高い順', gears_path(star_count: "評価の高い順") %>
+              </p>
             </div>
             <div class = "contents" style="display:flex; flex-wrap:wrap;">
               <% @gears.each do |gear| %>

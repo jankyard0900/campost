@@ -70,7 +70,17 @@ class Public::CampsController < ApplicationController
     @areas = Area.all
     if params[:area_id]
       @area = Area.find(params[:area_id])
-      @area_camps = @area.camps.page(params[:page]).per(6)
+      @area_camps = @area.camps
+      @camps_count = @area.camps.count
+    else
+      redirect_to camps_path
+    end
+    if params[:latest]
+      @area_camps = @area_camps.latest.page(params[:page]).per(6)
+    elsif params[:star_count]
+      @area_camps = @area_camps.left_joins(:camp_reviews).group(:id).order("AVG(camp_reviews.rate) desc").page(params[:page]).per(6)
+    else
+      @area_camps = @area_camps.page(params[:page]).per(6)
     end
   end
 
