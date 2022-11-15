@@ -16,17 +16,15 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'searches/search'=>'searches#search', as: 'search'
 
-    resources :camp_reviews, only: [:new, :create, :destroy]
-
+    get 'gears/search'=>'gears#search', as: 'gear_search'
     resources :gears, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :gear_reviews, only: [:new, :create, :destroy]
     end
-    get 'gears/search'=>'gears#search', as: 'gear_search'
 
+    get 'camps/search'=>'camps#search', as: 'camp_search'
     resources :camps, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :camp_reviews, only: [:new, :create, :destroy]
     end
-    get 'camps/search'=>'camps#search', as: 'camp_search'
 
     resources :customers, only: [:show, :edit, :update]
     get 'customers/:id/unsubscribe'=>'customers#unsubscribe', as: 'unsubscribe'

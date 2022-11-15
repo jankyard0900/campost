@@ -17,4 +17,8 @@ class Camp < ApplicationRecord
   validates :fee_information,    presence: true
 
   scope :latest, -> {order(created_at: :desc)}
+
+  def self.looks(word)
+    @camp = Camp.where("name LIKE?", "%#{word}%")
+  end
 end

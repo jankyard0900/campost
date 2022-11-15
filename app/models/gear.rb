@@ -10,4 +10,8 @@ class Gear < ApplicationRecord
   validates :price,       presence: true
 
   scope :latest, -> {order(created_at: :desc)}
+
+  def self.looks(word)
+    @gear = Gear.where("name LIKE?", "%#{word}%")
+  end
 end

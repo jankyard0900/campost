@@ -1,7 +1,8 @@
 <div class='container mt-5 h-75'>
   <div class='row h-100'>
     <div class='col-md-2'>
-      エリア検索機能
+      <p>エリア検索</p>
+      <%= render 'area_search', areas: @areas %>
     </div>
 
     <div class='col-md-10'>
@@ -13,6 +14,7 @@
           | <%= link_to '評価の高い順', camps_path(star_count: "評価の高い順") %>
         </p>
       </div>
+      
       <div class = "contents" style="display:flex; flex-wrap:wrap;">
         <% @camps.each do |camp| %>
         <div class="col-lg-4">

@@ -17,6 +17,7 @@ class Public::CampsController < ApplicationController
   end
 
   def index
+    @areas = Area.all
     @camps_all = Camp.all
     if params[:latest]
       @camps = Camp.latest.page(params[:page]).per(6)
@@ -66,6 +67,9 @@ class Public::CampsController < ApplicationController
   end
 
   def search
+    @areas = Area.all
+    @area = Area.find(params[:id])
+    @area_camps = @area.camps.page(params[:page]).per(6)
   end
 
   private

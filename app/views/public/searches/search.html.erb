@@ -1,2 +1,28 @@
-<h1>Public::Searches#search</h1>
-<p>Find me in app/views/public/searches/search.html.erb</p>
+<h2>検索結果画面</h2>
+<table>
+  <% if @range == "キャンプ場" %>
+    <tbody>
+      <% unless @camps.blank? %>
+        <% @camps.each do |camp| %>
+          <tr>
+            <td><%= camp.name %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <h3>見つかりませんでした。検索条件を変更して再度お試しください。</h3>
+      <% end %>
+    </tbody>
+  <% else %>
+    <tbody>
+      <% unless @camps.blank? %>
+        <% @gears.each do |gear| %>
+          <tr>
+            <td><%= gear.name %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <h3>見つかりませんでした。検索条件を変更して再度お試しください。</h3>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
