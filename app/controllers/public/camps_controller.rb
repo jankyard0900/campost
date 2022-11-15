@@ -9,7 +9,7 @@ class Public::CampsController < ApplicationController
     @camp.customer_id = current_customer.id
     if @camp.save
       flash[:success] = "キャンプ場が作成できました！"
-      redirect_to camps_path
+      redirect_to camp_path(@camp.id)
     else
       @areas = Area.all
       render :new
