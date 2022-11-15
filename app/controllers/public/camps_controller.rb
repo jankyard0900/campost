@@ -68,8 +68,10 @@ class Public::CampsController < ApplicationController
 
   def search
     @areas = Area.all
-    @area = Area.find(params[:id])
-    @area_camps = @area.camps.page(params[:page]).per(6)
+    if params[:area_id]
+      @area = Area.find(params[:area_id])
+      @area_camps = @area.camps.page(params[:page]).per(6)
+    end
   end
 
   private

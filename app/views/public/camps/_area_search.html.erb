@@ -4,7 +4,7 @@
 <div class="border border-dark">
   <% areas.each do |area| %>
     <p>
-      <%= link_to camp_search_path(area) do %>
+      <%= link_to camp_search_path(area_id: area.id) do %>
         <%= area.name %>
       <% end %>
     </p>

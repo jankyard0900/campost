@@ -1,32 +1,57 @@
 <div class='container mt-5 h-75'>
   <div class='row h-100'>
     <div class='col-md-2'>
-      <%= render 'area_search', genres: @areas %>
+      <p>エリア検索</p>
+      <%= render 'area_search', areas: @areas %>
     </div>
 
-    <div  class='col-md-10'>
+    <div class='col-md-10'>
       <div>
-        <div style="display:flex; flex-wrap:wrap;">
-          <h3><strong><%= @area.name %>一覧</strong></h3>
-          <div class="mt-2"><strong>（全<%= @area_camps.count%>件）</strong></div>
-        </div>
-        <div class = "new-arrival-contents" style="display:flex; flex-wrap:wrap;">
-          <% @area_camps.each do |camp| %>
-          <div class="col-lg-3">
-            <div class="d-flex flex-column">
-                <div>投稿画像一枚目表示</div>
-                <h5><%= camp.name %></h5>
-                <h5>☆表示（平均）</h5>
-            </div>
+        <h3><strong><%= @area.name %>のキャンプ場一覧</strong></h3>
+        <div class="mt-2"><strong>（全<%= @area_camps.count%>件）</strong></div>
+        <!--並び替え機能-->
+        <!--<p>-->
+        <!--  <%#= link_to '新しい順', camps_path(latest: "新着順") %>-->
+        <!--  | <%#= link_to '評価の高い順', camps_path(star_count: "評価の高い順") %>-->
+        <!--</p>-->
+      </div>
+
+      <div class = "contents" style="display:flex; flex-wrap:wrap;">
+        <% @area_camps.each do |camp| %>
+        <div class="col-lg-4">
+          <div class="d-flex flex-column">
+            <!--投稿画像の一枚目表示-->
+            <%= link_to camp_path(camp.id) do %>
+              <% camp.camp_images.first(1).each do |image| %>
+                <%= image_tag image, size:'200x160' %>
+              <% end %>
+            <% end %>
+            <h5 style="margin-bottom: 20px; margin-top: 20px;"><b><%= camp.name %></b></h5>
+            <!--レビューの平均☆表示-->
+            <div id="star-rate<%= camp.id%>"></div>
+            <p>(<b><%= camp.camp_reviews.count %>件</b>)</p>
+            <script>
+            $(document).on('turbolinks:load', function() {
+              $('#star-rate<%= camp.id %>').empty();
+              $('#star-rate<%= camp.id%>').raty({
+                size      : 36,
+                starOff   : '<%= asset_path('star-off.png') %>',
+                starOn    : '<%= asset_path('star-on.png') %>',
+                starHalf  : '<%= asset_path('star-half.png') %>',
+                half      : true,
+                readOnly  : true,
+                score: '<%= camp.camp_reviews.average(:rate).to_f.round(1) %>',
+              });
+            });
+            </script>
           </div>
-        <% end %>
         </div>
+        <% end %>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <%= paginate @area_camps %>
       </div>
     </div>
-
-    <div style="margin:0 auto;">
-      <%= paginate @area_camps%>
-    </div>
-
   </div>
 </div>
