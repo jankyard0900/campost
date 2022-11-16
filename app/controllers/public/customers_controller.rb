@@ -1,4 +1,6 @@
 class Public::CustomersController < ApplicationController
+  before_action :a
+
   def show
     @customer = Customer.find(params[:id])
     @camp_reviews = @customer.camp_reviews
@@ -34,5 +36,11 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:name, :profile_image, :is_active)
+  end
+
+  def a
+    if !customer_signed_in? && !admin_signed_in?
+      redirect_to camps_path
+    end
   end
 end
