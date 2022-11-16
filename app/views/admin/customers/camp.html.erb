@@ -1,0 +1,63 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <h5 class="ml-5 my-4 px-3", style="background-color: #eee; width:300px;"><b><%= @customer.name %>さんの会員詳細</b></h5>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-borderless">
+        <tr>
+          <td><b>会員ID</b></td>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <td><b>ニックネーム</b></td>
+          <td><%= @customer.name %></td>
+        </tr>
+        <tr>
+          <td><b>メールアドレス</b></td>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <td><b>会員ステータス</b></td>
+          <% if @customer.is_active == true %>
+            <td class="text-success"><b>有効</b></td>
+          <% else %>
+            <td class="text-danger"><b>退会</b></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td><b><%= link_to '編集する', edit_admin_customer_path(@customer.id), class: "btn btn-success ml-2 mt-3 mb-3 px-5" %></b></td>
+          <td><%= link_to "レビュー一覽", admin_customer_path(@customer.id), class: "btn btn-primary" %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-8">
+      <!--会員のキャンプ場投稿一覽-->
+      <h5>投稿したキャンプ場</h5>
+      <table>
+      <% @camps.each do |camp| %>
+        <tr>
+          <td>
+            <%= link_to camp_path(camp.id), class: 'text-dark' do %>
+              <u><%= camp.name %></u>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </table>
+    <!--会員のキャンプギア投稿一覽-->
+      <h5>投稿したキャンプギア</h5>
+      <table>
+      <% @gears.each do |gear| %>
+        <tr>
+          <td>
+            <%= link_to gear_path(gear.id), class: 'text-dark' do %>
+              <u><%= gear.name %></u>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+</div>
