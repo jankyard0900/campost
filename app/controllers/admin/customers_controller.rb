@@ -5,6 +5,14 @@ class Admin::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    @camp_reviews = @customer.camp_reviews
+    @gear_reviews = @customer.gear_reviews
+  end
+
+  def camp
+    @customer = Customer.find(params[:id])
+    @camps = @customer.camps
+    @gears = @customer.gears
   end
 
   def edit

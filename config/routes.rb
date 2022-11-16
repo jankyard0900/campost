@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   # 管理者用
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
+    get 'admin/customers/:id/camps'=>'customers#camp', as: 'my_page'
 
     resources :tags, only: [:index]
 
