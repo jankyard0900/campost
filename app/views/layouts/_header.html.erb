@@ -4,6 +4,7 @@
       <!--管理者がログインしているとき-->
       <% if admin_signed_in? %>
         <h2>Camposts</h2>
+      <!--それ以外-->
       <% else %>
         <%= link_to root_path, class: "nav-brand text-dark" do %>
           <font size="6">Camposts</font>
@@ -30,14 +31,14 @@
             <li><%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-outline-dark" %></li>
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-outline-dark" %></li>
           <!--ゲストログインしているとき-->
-          <!--<#% elseif guest_customer_signed_in? %>
-            <li><#%= link_to "キャンプギア一覽", gears_path, class: "btn btn-outline-dark" %></li>
-            <li><#%= link_to "キャンプ場一覽", camps_path, class: "btn btn-outline-dark" %></li>
-            <li><#%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %></li>-->
+          <!--<#% elsif current_customer.name == "ゲストユーザー" %>-->
+          <!--  <li><#%= link_to "キャンプギア一覽", gears_path, class: "btn btn-outline-dark" %></li>-->
+          <!--  <li><#%= link_to "キャンプ場一覽", camps_path, class: "btn btn-outline-dark" %></li>-->
+          <!--  <li><#%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %></li>-->
           <!--ログインしてないとき-->
           <% else %>
             <li><%= link_to "新規会員登録", new_customer_registration_path, class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "ゲストログイン"%></li>
+            <li><%= link_to "ゲストログイン", cusotmers_guest_sign_in_path, method: :post, class: "nav-link btn btn-outline-dark" %></li>
             <li><%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-outline-dark" %></li>
           <% end %>
         </ul>
