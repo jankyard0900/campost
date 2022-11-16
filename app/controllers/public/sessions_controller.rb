@@ -6,7 +6,7 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     customer = Customer.guest
     sign_in customer
-    redirect_to customer_path(customer), notice: 'ゲストでログインしました。'
+    redirect_to camps_path, notice: 'ゲストでログインしました。'
   end
 
   # GET /resource/sign_in
@@ -27,7 +27,7 @@ class Public::SessionsController < Devise::SessionsController
   protected
 
   def after_sign_in_path_for(resource)
-    customer_path(current_customer)
+    camps_path
   end
 
   def after_sign_out_path_for(resource)
