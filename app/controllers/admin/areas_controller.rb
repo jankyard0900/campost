@@ -1,4 +1,6 @@
 class Admin::AreasController < ApplicationController
+  before_action :authenticate_admin!
+
   def edit
     @area = Area.find(params[:id])
   end
