@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     end
 
     resources :customers, only: [:show, :edit, :update]
+    get 'customers/:id/camps'=>'customers#camp', as: 'my_page'
     get 'customers/:id/unsubscribe'=>'customers#unsubscribe', as: 'unsubscribe'
     patch 'customers/:id/withdraw'=>'customers#withdraw', as: 'withdraw'
 

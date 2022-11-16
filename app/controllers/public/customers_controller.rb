@@ -7,6 +7,12 @@ class Public::CustomersController < ApplicationController
     @gear_reviews = @customer.gear_reviews
   end
 
+  def camp
+    @customer = Customer.find(params[:id])
+    @camps = @customer.camps
+    @gears = @customer.gears
+  end
+
   def edit
     @customer = Customer.find(params[:id])
   end

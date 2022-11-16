@@ -5,7 +5,9 @@
   <p><%= @customer.name %></p>
   <%= link_to "プロフィール編集", edit_customer_path(@customer.id), class: 'btn btn-success' %>
 </div>
-
+<div>
+  <%= link_to "投稿一覽", my_page_path(@customer.id), class: "btn btn-primary" %>
+</div>
 <!--会員のキャンプ場レビュー一覽-->
 <div>
   <h5>レビューしたキャンプ場</h5>
