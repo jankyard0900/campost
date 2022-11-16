@@ -11,7 +11,7 @@
   <% end %>
 
   <tr>
-    <td><b><%= f.label :camp_images, "キャンプ場の画像（５枚まで）" %></b></td>
+    <td><b><%= f.label :camp_images, "キャンプ場の画像" %></b></td>
     <td><%= f.file_field :camp_images, multiple: true, accept: "image/*" %></td>
   </tr>
   <tr>
@@ -59,12 +59,11 @@
   </tr>
 </table>
 <% end %>
-<img id="preview_0" style="width:15%;">
-<img id="preview_1" style="width:15%;">
-<img id="preview_2" style="width:15%;">
-<img id="preview_3" style="width:15%;">
-<img id="preview_4" style="width:15%;">
-
+  <img id="preview_0" style="width:15%;">
+  <img id="preview_1" style="width:15%;">
+  <img id="preview_2" style="width:15%;">
+  <img id="preview_3" style="width:15%;">
+  <img id="preview_4" style="width:15%;">
 <script>
 $('#camp_camp_images').on('change', function (e) {
 
