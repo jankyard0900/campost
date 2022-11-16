@@ -1,0 +1,41 @@
+<h4>マイページ</h4>
+<div>
+  <%= image_tag @customer.get_profile_image(100, 100) %>
+  <p><b>ニックネーム</b></p>
+  <p><%= @customer.name %></p>
+  <%= link_to "プロフィール編集", edit_customer_path(@customer.id), class: 'btn btn-success' %>
+</div>
+<div>
+  <%= link_to "レビュー一覽", customer_path(@customer.id), class: "btn btn-primary" %>
+</div>
+<!--会員のキャンプ場投稿一覽-->
+<div>
+  <h5>投稿したキャンプ場</h5>
+  <table>
+  <% @camps.each do |camp| %>
+    <tr>
+      <td>
+        <%= link_to camp_path(camp.id), class: 'text-dark' do %>
+          <u><%= camp.name %></u>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+
+<!--会員のキャンプギア投稿一覽-->
+<div>
+  <h5>投稿したキャンプギア</h5>
+  <table>
+  <% @gears.each do |gear| %>
+    <tr>
+      <td>
+        <%= link_to gear_path(gear.id), class: 'text-dark' do %>
+          <u><%= gear.name %></u>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>
