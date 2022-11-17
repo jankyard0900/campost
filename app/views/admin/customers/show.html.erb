@@ -26,88 +26,95 @@
           <% end %>
         </tr>
         <tr>
-          <td><b><%= link_to '編集する', edit_admin_customer_path(@customer.id), class: "btn btn-success ml-2 mt-3 mb-3 px-5" %></b></td>
+          <td><%= link_to '編集する', edit_admin_customer_path(@customer.id), class: "btn btn-success" %></td>
           <td><%= link_to "投稿一覽", admin_my_page_path(@customer.id), class: "btn btn-primary" %></td>
         </tr>
       </table>
     </div>
     <div class="col-md-8">
-      <h5>レビューしたキャンプ場</h5>
-      <table>
-      <% @camp_reviews.each do |review| %>
-        <tr>
-          <td>
-            <%= link_to camp_path(review.camp.id), class: 'text-dark' do %>
-              <u><%= review.camp.name %></u>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h5 style="background-color: #eee; width:260px;"><b>レビューしたキャンプ場</b></h5>
+            <table>
+            <% @camp_reviews.each do |review| %>
+              <tr>
+                <td>
+                  <%= link_to camp_path(review.camp.id), class: 'text-dark' do %>
+                    <u><%= review.camp.name %></u>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div id="star-rate<%= review.id%>"></div>
+                </td>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#star-rate<%= review.id %>').empty();
+                  $('#star-rate<%= review.id%>').raty({
+                    size      : 36,
+                    starOff   : '<%= asset_path('star-off.png') %>',
+                    starOn    : '<%= asset_path('star-on.png') %>',
+                    starHalf  : '<%= asset_path('star-half.png') %>',
+                    half      : true,
+                    readOnly  : true,
+                    score: '<%= review.rate %>',
+                  });
+                });
+                </script>
+              </tr>
+              <tr>
+                <td><b><%= review.title %></b></td>
+              </tr>
+              <tr>
+                <td><%= review.review %></td>
+              </tr>
             <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div id="star-rate<%= review.id%>"></div>
-          </td>
-          <script>
-          $(document).on('turbolinks:load', function() {
-            $('#star-rate<%= review.id %>').empty();
-            $('#star-rate<%= review.id%>').raty({
-              size      : 36,
-              starOff   : '<%= asset_path('star-off.png') %>',
-              starOn    : '<%= asset_path('star-on.png') %>',
-              starHalf  : '<%= asset_path('star-half.png') %>',
-              half      : true,
-              readOnly  : true,
-              score: '<%= review.rate %>',
-            });
-          });
-          </script>
-        </tr>
-        <tr>
-          <td><b><%= review.title %></b></td>
-        </tr>
-        <tr>
-          <td><%= review.review %></td>
-        </tr>
-      <% end %>
-      </table>
-
-    <!--会員のキャンプギアレビュー一覽-->
-      <h5>レビューしたキャンプギア</h5>
-      <table>
-      <% @gear_reviews.each do |review| %>
-        <tr>
-          <td>
-            <%= link_to gear_path(review.gear.id), class: 'text-dark' do %>
-              <u><%= review.gear.name %></u>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div id="rate<%= review.id%>"></div>
-          </td>
-          <script>
-          $(document).on('turbolinks:load', function() {
-            $('#rate<%= review.id %>').empty();
-            $('#rate<%= review.id %>').raty({
-              size      : 36,
-              starOff   : '<%= asset_path('star-off.png') %>',
-              starOn    : '<%= asset_path('star-on.png') %>',
-              starHalf  : '<%= asset_path('star-half.png') %>',
-              half      : true,
-              readOnly  : true,
-              score: '<%= review.rate %>',
-            });
-          });
-          </script>
-        </tr>
-        <tr>
-          <td><b><%= review.title %></b></td>
-        </tr>
-        <tr>
-          <td><%= review.review %></td>
-        </tr>
-      <% end %>
-      </table>
+            </table>
+          </div>
+        <!--会員のキャンプギアレビュー一覽-->
+          <div class="col-sm-6">
+          <h5 style="background-color: #eee; width:260px;"><b>レビューしたキャンプギア</b></h5>
+          <table>
+          <% @gear_reviews.each do |review| %>
+            <tr>
+              <td>
+                <%= link_to gear_path(review.gear.id), class: 'text-dark' do %>
+                  <u><%= review.gear.name %></u>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="rate<%= review.id%>"></div>
+              </td>
+              <script>
+              $(document).on('turbolinks:load', function() {
+                $('#rate<%= review.id %>').empty();
+                $('#rate<%= review.id %>').raty({
+                  size      : 36,
+                  starOff   : '<%= asset_path('star-off.png') %>',
+                  starOn    : '<%= asset_path('star-on.png') %>',
+                  starHalf  : '<%= asset_path('star-half.png') %>',
+                  half      : true,
+                  readOnly  : true,
+                  score: '<%= review.rate %>',
+                });
+              });
+              </script>
+            </tr>
+            <tr>
+              <td><b><%= review.title %></b></td>
+            </tr>
+            <tr>
+              <td><%= review.review %></td>
+            </tr>
+          <% end %>
+          </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
