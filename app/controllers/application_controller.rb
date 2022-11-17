@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_guest_user
     if customer_signed_in? && (current_customer.name == "ゲストユーザー")
-      redirect_to camps_path, notice:'ゲストユーザーはこの画面はご利用できません。'
+      redirect_to camps_path, notice: 'ゲストユーザーはこの画面はご利用できません。'
     end
   end
 end
