@@ -1,5 +1,11 @@
 class Public::CampsController < ApplicationController
+  before_action :gatekeeper
+  before_action :ensure_guest_user, skip: [:index, :show, :search]
+
   def new
+    if admin_signed_in?
+      redirect_to camps_path, notice: '管理者は投稿できません。'
+    end
     @camp = Camp.new
     @areas = Area.all
   end
@@ -8,8 +14,7 @@ class Public::CampsController < ApplicationController
     @camp = Camp.new(camp_params)
     @camp.customer_id = current_customer.id
     if @camp.save
-      flash[:success] = "キャンプ場が作成できました！"
-      redirect_to camp_path(@camp.id)
+      redirect_to camp_path(@camp.id), notice: 'キャンプ場が作成できました！'
     else
       @areas = Area.all
       render :new
@@ -35,6 +40,9 @@ class Public::CampsController < ApplicationController
 
   def edit
     @camp = Camp.find(params[:id])
+    unless (@camp.customer == current_customer) || admin_signed_in?
+      redirect_to camp_path(@camp.id), notice: '他のユーザーの投稿は編集できません。'
+    end
     @areas = Area.all
   end
 
@@ -47,8 +55,7 @@ class Public::CampsController < ApplicationController
       end
     end
     if @camp.update(camp_params)
-      flash[:success] = "投稿を変更しました。"
-      redirect_to camp_path(@camp.id)
+      redirect_to camp_path(@camp.id), notice: '投稿を変更しました。'
     else
       @areas = Area.all
       render :edit
@@ -58,8 +65,7 @@ class Public::CampsController < ApplicationController
   def destroy
     @camp = Camp.find(params[:id])
     if @camp.destroy
-      flash[:success] = "投稿を削除しました。"
-      redirect_to camps_path
+      redirect_to camps_path, notice: '投稿を削除しました。'
     else
       @areas = Area.all
       render :edit

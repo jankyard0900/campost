@@ -1,4 +1,6 @@
 class Public::SearchesController < ApplicationController
+  before_action :gatekeeper
+
   def search
     @areas = Area.all
     @categories = Category.all

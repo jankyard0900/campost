@@ -1,6 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <!--管理者がログインしているとき-->
       <% if admin_signed_in? %>
         <h2>Camposts</h2>
@@ -10,9 +13,6 @@
           <font size="6">Camposts</font>
         <% end %>
       <% end %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <div id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <!--管理者がログインしているとき-->

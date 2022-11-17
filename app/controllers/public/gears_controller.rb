@@ -1,5 +1,11 @@
 class Public::GearsController < ApplicationController
+  before_action :gatekeeper
+  before_action :ensure_guest_user, skip: [:index, :show, :search]
+
   def new
+    if admin_signed_in?
+      redirect_to gears_path, notice: '管理者は投稿できません。'
+    end
     @gear = Gear.new
     @categories = Category.all
   end
@@ -8,8 +14,7 @@ class Public::GearsController < ApplicationController
     @gear = Gear.new(gear_params)
     @gear.customer_id = current_customer.id
     if @gear.save
-      flash[:success] = "キャンプギアが作成できました！"
-      redirect_to gear_path(@gear.id)
+      redirect_to gear_path(@gear.id), notice: 'キャンプギアが作成できました！'
     else
       @categories = Category.all
       render :new
@@ -36,13 +41,15 @@ class Public::GearsController < ApplicationController
   def edit
     @gear = Gear.find(params[:id])
     @categories = Category.all
+    unless (@gear.customer == current_customer) || admin_signed_in?
+      redirect_to gear_path(@gear.id), notice: '他のユーザーの投稿は編集できません。'
+    end
   end
 
   def update
     @gear = Gear.find(params[:id])
     if @gear.update(gear_params)
-      flash[:success] = "投稿を変更しました。"
-      redirect_to gear_path(@gear.id)
+      redirect_to gear_path(@gear.id), notice: '投稿を変更しました。'
     else
       @categories = Category.all
       render :edit
@@ -52,8 +59,7 @@ class Public::GearsController < ApplicationController
   def destroy
     @gear = Gear.find(params[:id])
     if @gear.destroy
-      flash[:success] = "投稿を削除しました。"
-      redirect_to gears_path
+      redirect_to gears_path, notice: '投稿を削除しました。'
     else
       @categories = Category.all
       render :edit

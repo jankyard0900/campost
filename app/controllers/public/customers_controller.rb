@@ -1,5 +1,7 @@
 class Public::CustomersController < ApplicationController
-  before_action :a
+  before_action :gatekeeper
+  before_action :ensure_guest_user
+  before_action :ensure_correct_customer, only: [:show, :camp]
 
   def show
     @customer = Customer.find(params[:id])
@@ -15,16 +17,22 @@ class Public::CustomersController < ApplicationController
 
   def edit
     @customer = Customer.find(params[:id])
+    unless (@customer == current_customer)
+      redirect_to camps_path, notice: '他のユーザーの画面は表示できません。'
+    end
   end
 
   def unsubscribe
     @customer = Customer.find(params[:id])
+    unless (@customer == current_customer)
+      redirect_to camps_path, notice: '他のユーザーの画面は表示できません。'
+    end
   end
 
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to customer_path, notice: "プロフィールの更新が完了しました。"
+      redirect_to customer_path(@customer), notice: '変更を保存しました！'
     else
       render :edit
     end
@@ -32,6 +40,9 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = Customer.find(params[:id])
+    unless (@customer == current_customer)
+      redirect_to camps_path, notice: '他のユーザーの画面は表示できません。'
+    end
     @customer.update(is_active: false)
     reset_session
     flash[:notice] = "退会処理を実行致しました。"
@@ -44,9 +55,10 @@ class Public::CustomersController < ApplicationController
     params.require(:customer).permit(:name, :profile_image, :is_active)
   end
 
-  def a
-    if !customer_signed_in? && !admin_signed_in?
-      redirect_to camps_path
+  def ensure_correct_customer
+    @customer =  Customer.find(params[:id])
+    unless (@customer == current_customer) || admin_signed_in?
+      redirect_to customer_path(current_customer), notice: '他のユーザーの画面は表示できません。'
     end
   end
 end

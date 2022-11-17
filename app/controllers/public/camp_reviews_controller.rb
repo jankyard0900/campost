@@ -1,6 +1,12 @@
 class Public::CampReviewsController < ApplicationController
+  before_action :gatekeeper
+  before_action :ensure_guest_user
+
   def new
     @camp = Camp.find(params[:camp_id])
+    if admin_signed_in?
+      redirect_to camp_path(@camp), notice: '管理者は投稿できません。'
+    end
     @camp_review = CampReview.new
   end
 
@@ -9,8 +15,7 @@ class Public::CampReviewsController < ApplicationController
     @camp_review = current_customer.camp_reviews.new(camp_review_params)
     @camp_review.camp_id = @camp.id
     if @camp_review.save
-      flash[:success] = "レビューを投稿しました。"
-      redirect_to camp_path(@camp.id)
+      redirect_to camp_path(@camp.id), notice: 'レビューを投稿しました。'
     else
       render :new
     end
@@ -18,7 +23,7 @@ class Public::CampReviewsController < ApplicationController
 
   def destroy
     CampReview.find(params[:id]).destroy
-    redirect_to request.referer
+    redirect_to request.referer, notice: 'レビューを削除しました。'
   end
 
   private
