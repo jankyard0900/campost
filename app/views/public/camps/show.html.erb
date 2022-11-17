@@ -62,7 +62,9 @@
           <td><%= @camp.fee_information %></td>
         </tr>
       </table>
-      <%= link_to "キャンプ場レビューを書く >", new_camp_camp_review_path(@camp.id), class: "btn btn-secondary" %>
+      <% if customer_signed_in? && (current_customer.name != "ゲストユーザー") %>
+        <%= link_to "キャンプ場レビューを書く >", new_camp_camp_review_path(@camp.id), class: "btn btn-secondary" %>
+      <% end %>
       <h3>レビュー一覽</h3>
       <% @camp_reviews.each do |review| %>
       <table>
