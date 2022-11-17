@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-  before_action :gatekeeper
+  before_action :authenticate_customer!
   before_action :ensure_guest_user
   before_action :ensure_correct_customer, only: [:show, :camp]
 
@@ -57,7 +57,7 @@ class Public::CustomersController < ApplicationController
 
   def ensure_correct_customer
     @customer =  Customer.find(params[:id])
-    unless (@customer == current_customer) || admin_signed_in?
+    unless (@customer == current_customer)
       redirect_to customer_path(current_customer), notice: '他のユーザーの画面は表示できません。'
     end
   end
