@@ -1,6 +1,6 @@
 class Public::GearsController < ApplicationController
   before_action :gatekeeper
-  before_action :ensure_guest_user, skip: [:index, :show, :search]
+  before_action :ensure_guest_user,  only: [:new, :create, :edit, :update, :destroy]
 
   def new
     if admin_signed_in?
