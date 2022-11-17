@@ -1,8 +1,8 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <h5 class="ml-5 my-4 px-3", style="background-color: #eee; width:350px;"><b><%= @customer.name %>さんの会員情報編集</b></h5>
+    <h5 class="ml-5 my-4 pl-3 text-center", style="background-color: #eee; width:350px;"><b><%= @customer.name %>さんの会員情報編集</b></h5>
   </div>
-  <div class="row">
+  <div class="row ml-5">
     <%= render "admin/shared/error_messages", resource: @customer %>
     <%= form_with model: @customer, url: admin_customer_path(@customer.id) do |f| %>
     <table class="table table-borderless">
