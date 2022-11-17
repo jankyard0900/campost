@@ -2,71 +2,29 @@
   <div class="row">
     <h5 class='mx-5 my-3', style="background-color: #eee; width:220px; padding-left: 12px; margin-bottom: 40px;"><b>エリア・カテゴリ一覧</b></h5>
   </div>
+
   <div class="row">
     <div class="col-md-6">
       <div class="d-flex justify-content-start">
         <h5 class='mx-5 my-5', style="background-color: #eee; width:220px; padding-left: 12px; margin-bottom: 40px;"><b>エリア追加・一覧</b></h5>
       </div>
-      <div>
-        <%= render "admin/shared/error_messages", resource: @area %>
-        <%= form_with model: @area, url: admin_areas_path do |f| %>
-          <div class="form-inline">
-            <span class="mr-3"><b><%= f.label :name, 'エリア名' %></b></span>
-            <span class="mr-3"><%= f.text_field :name, placeholder: "エリア名", class: 'form-control' %></span>
-            <span class="mr-3"><%= f.submit '新規登録', class: 'btn btn-success' %></span>
-          </div>
-        <% end %>
+      <div class="row d-flex justify-content-center">
+        <%= render "admin/areas/form", resource: @area, model: @area, url: admin_areas_path, name: "エリア名", submit: "新規登録" %>
       </div>
       <div class="mt-5">
-        <table class="table">
-          <thead style="background-color: #eee;">
-            <th class="text-center">エリア名</th>
-            <th></th>
-          </thead>
-          <% @areas.each do |area| %>
-          <tbody>
-            <tr>
-              <td><%= area.name %></td>
-              <td class="d-flex justify-content-end">
-                <%= link_to "編集する", edit_admin_area_path(area.id), class: 'btn btn-success' %>
-              </td>
-            </tr>
-          </tbody>
-          <% end %>
-        </table>
+        <%= render "area_index", areas: @areas %>
       </div>
     </div>
+
     <div class="col-md-6">
       <div class="d-flex justify-content-start">
         <h5 class='mx-5 my-5', style="background-color: #eee; width:220px; padding-left: 12px; margin-bottom: 40px;"><b>カテゴリ追加・一覧</b></h5>
       </div>
-      <div>
-        <%= render "admin/shared/error_messages", resource: @category %>
-        <%= form_with model: @category, url: admin_categories_path do |f| %>
-          <div class="form-inline">
-            <span class="mr-3"><b><%= f.label :name, 'カテゴリ名' %></b></span>
-            <span class="mr-3"><%= f.text_field :name, placeholder: "カテゴリ名", class: 'form-control' %></span>
-            <span class="mr-3"><%= f.submit '新規登録', class: 'btn btn-success' %></span>
-          </div>
-        <% end %>
+      <div class="row d-flex justify-content-center">
+        <%= render "admin/areas/form", resource: @category, model: @category, url: admin_categories_path, name: "カテゴリ名", submit: "新規登録" %>
       </div>
       <div class="mt-5">
-        <table class="table">
-          <thead style="background-color: #eee;">
-            <th class="text-center">カテゴリ名</th>
-            <th></th>
-          </thead>
-          <% @categories.each do |category| %>
-          <tbody>
-            <tr>
-              <td><%= category.name %></td>
-              <td class="d-flex justify-content-end">
-                <%= link_to "編集する", edit_admin_category_path(category.id), class: 'btn btn-success' %>
-              </td>
-            </tr>
-          </tbody>
-          <% end %>
-        </table>
+        <%= render "category_index", categories: @categories %>
       </div>
     </div>
   </div>

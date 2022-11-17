@@ -1,0 +1,16 @@
+<table class="table">
+  <thead style="background-color: #eee;">
+    <th class="text-center">エリア名</th>
+    <th></th>
+  </thead>
+  <% areas.each do |area| %>
+  <tbody>
+    <tr>
+      <td><%= area.name %></td>
+      <td class="d-flex justify-content-end">
+        <%= link_to "編集する", edit_admin_area_path(area.id), class: 'btn btn-success' %>
+      </td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

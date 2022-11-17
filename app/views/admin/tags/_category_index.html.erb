@@ -1,0 +1,16 @@
+<table class="table">
+  <thead style="background-color: #eee;">
+    <th class="text-center">カテゴリ名</th>
+    <th></th>
+  </thead>
+  <% categories.each do |category| %>
+  <tbody>
+    <tr>
+      <td><%= category.name %></td>
+      <td class="d-flex justify-content-end">
+        <%= link_to "編集する", edit_admin_category_path(category.id), class: 'btn btn-success' %>
+      </td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
