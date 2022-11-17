@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
   before_action :ensure_guest_user
-  before_action :ensure_correct_customer, only: [:show, :camp]
+  before_action :ensure_correct_customer
 
   def show
     @customer = Customer.find(params[:id])
@@ -17,16 +17,10 @@ class Public::CustomersController < ApplicationController
 
   def edit
     @customer = Customer.find(params[:id])
-    unless (@customer == current_customer)
-      redirect_to camps_path, notice: '他のユーザーの画面は表示できません。'
-    end
   end
 
   def unsubscribe
     @customer = Customer.find(params[:id])
-    unless (@customer == current_customer)
-      redirect_to camps_path, notice: '他のユーザーの画面は表示できません。'
-    end
   end
 
   def update
@@ -40,9 +34,6 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = Customer.find(params[:id])
-    unless (@customer == current_customer)
-      redirect_to camps_path, notice: '他のユーザーの画面は表示できません。'
-    end
     @customer.update(is_active: false)
     reset_session
     flash[:notice] = "退会処理を実行致しました。"
