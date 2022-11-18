@@ -31,33 +31,8 @@
         </tr>
       </table>
     </div>
-    <div class="col-md-8">
-      <!--会員のキャンプ場投稿一覽-->
-      <h5>投稿したキャンプ場</h5>
-      <table>
-      <% @camps.each do |camp| %>
-        <tr>
-          <td>
-            <%= link_to camp_path(camp.id), class: 'text-dark' do %>
-              <u><%= camp.name %></u>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </table>
-    <!--会員のキャンプギア投稿一覽-->
-      <h5>投稿したキャンプギア</h5>
-      <table>
-      <% @gears.each do |gear| %>
-        <tr>
-          <td>
-            <%= link_to gear_path(gear.id), class: 'text-dark' do %>
-              <u><%= gear.name %></u>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </table>
-    </div>
+
+    <!--会員が投稿した場・ギア一覽-->
+    <%= render 'public/customers/camp', camps: @camps, gears: @gears %>
   </div>
 </div>
