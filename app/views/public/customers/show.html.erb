@@ -1,15 +1,17 @@
-<h4>マイページ</h4>
-<div>
-  <%= image_tag @customer.get_profile_image(100, 100) %>
-  <p><b>ニックネーム</b></p>
-  <p><%= @customer.name %></p>
-  <%= link_to "プロフィール編集", edit_customer_path(@customer.id), class: 'btn btn-success' %>
-</div>
-<div>
-  <%= link_to "投稿一覽", my_page_path(@customer.id), class: "btn btn-primary" %>
-</div>
+<div class="container">
+  <div class="row">
+    <h4 class="mt-5 text-center", style="background-color: #eee; width:200px; padding-left: 8px; margin-bottom: 40px;"><b>マイページ</b></h4>
+  </div>
+  <div class="row">
+
+
+
+
+<!--会員情報-->
+<%= render 'my_page', customer: @customer, link: "投稿一覽", url: my_page_path(@customer.id) %>
+
 <!--会員のキャンプ場レビュー一覽-->
-<div>
+<div class="col-md-4">
   <h5>レビューしたキャンプ場</h5>
   <table>
   <% @camp_reviews.each do |review| %>
@@ -50,7 +52,7 @@
 </div>
 
 <!--会員のキャンプギアレビュー一覽-->
-<div>
+<div class="col-md-4">
   <h5>レビューしたキャンプギア</h5>
   <table>
   <% @gear_reviews.each do |review| %>
@@ -88,4 +90,8 @@
     </tr>
   <% end %>
   </table>
+</div>
+
+
+  </div>
 </div>
