@@ -31,14 +31,12 @@
         </tr>
       </table>
     </div>
-    
-    
-    
+
     <div class="col-md-8">
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <h5 style="background-color: #eee; width:260px;"><b>レビューしたキャンプ場</b></h5>
+            <h5 style="background-color: #eee; width:260px; margin-bottom: 40px;"><b>レビューしたキャンプ場</b></h5>
             <table>
             <% @camp_reviews.each do |review| %>
               <tr>
@@ -71,14 +69,18 @@
                 <td><b><%= review.title %></b></td>
               </tr>
               <tr>
-                <td><%= review.review %></td>
+                <td>
+                  <div class="border-bottom">
+                    <%= review.review %>
+                  </div>
+                </td>
               </tr>
             <% end %>
             </table>
           </div>
         <!--会員のキャンプギアレビュー一覽-->
           <div class="col-sm-6">
-          <h5 style="background-color: #eee; width:260px;"><b>レビューしたキャンプギア</b></h5>
+          <h5 style="background-color: #eee; width:260px; margin-bottom: 40px;"><b>レビューしたキャンプギア</b></h5>
           <table>
           <% @gear_reviews.each do |review| %>
             <tr>
@@ -111,7 +113,11 @@
               <td><b><%= review.title %></b></td>
             </tr>
             <tr>
-              <td><%= review.review %></td>
+              <td>
+                <div class="border-bottom">
+                  <%= review.review %>
+                </div>
+              </td>
             </tr>
           <% end %>
           </table>
