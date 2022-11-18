@@ -1,40 +1,67 @@
-<h5>キャンプギア情報編集</h5>
-<%= form_with model: @gear, url: gear_path, method: :patch do |f| %>
-<table>
-  <% if @gear.errors.any? %>
-    <%= @gear.errors.count %>件のエラーが発生しました。
-    <ul>
-      <% @gear.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
+<div class="container px-5 my-5 px-sm-0 my-sm-0">
+  <div class="row">
+    <h5 class="mt-5 text-center", style="background-color: #eee; width:240px; padding-left: 8px; margin-bottom: 40px;"><b>キャンプギア情報編集</b></h5>
+  </div>
 
-  <tr>
-    <td><b><%= f.label :gear_images, "キャンプギアの画像" %></b></td>
-    <td><%= f.file_field :gear_images, multiple: true, accept: "image/*" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :name, "キャンプギア名" %></b></td>
-    <td><%= f.text_field :name, class: "form-control", placeholder: "キャンプギア名" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :price, "値段" %></b></td>
-    <td><%= f.text_field :price, class: "form-control", placeholder: "15000" %>　円</td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :brand_name, "ブランド名" %></b></td>
-    <td><%= f.text_field :brand_name, class: "form-control", placeholder: "snowpeak" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :category_id, "カテゴリ名" %></b></td>
-    <td><%= f.collection_select :category_id, @categories, :id, :name, include_blank: '選択してください', required: true %></td>
-  </tr>
-  <tr>
-    <td><%= f.submit "変更を保存", class: 'btn btn-success' %></td>
-    <% if (@gear.customer == current_customer) || admin_signed_in? %>
-    <td><%= link_to "キャンプギア情報削除", gear_path(@gear.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %></td>
-    <% end %>
-  </tr>
-</table>
-<% end %>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7 co-12">
+
+      <%= form_with model: @gear, url: gear_path, method: :patch do |f| %>
+
+        <% if @gear.errors.any? %>
+          <%= @gear.errors.count %>件のエラーが発生しました。
+          <ul>
+            <% @gear.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <div class="form-group">
+          <b><%= f.label :gear_images, "キャンプギアの画像" %></b>
+          <b><p>(編集する場合は1枚目から選択してください)</p></b>
+          <%= f.file_field :gear_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+        </div>
+
+        <div>
+          <img id="preview_0" style="width:15%;">
+          <img id="preview_1" style="width:15%;">
+          <img id="preview_2" style="width:15%;">
+          <img id="preview_3" style="width:15%;">
+          <img id="preview_4" style="width:15%;">
+        </div>
+
+        <div class="form-group mt-2">
+          <b><%= f.label :name, "キャンプギア名" %></b>
+          <%= f.text_field :name, class: "form-control", placeholder: "キャンプギア名" %>
+        </div>
+
+        <div class="form-group">
+          <b><%= f.label :price, "値段" %></b>
+          <%= f.text_field :price, class: "form-control", placeholder: "15000" %>　円
+        </div>
+
+        <div class="form-group">
+          <b><%= f.label :brand_name, "ブランド名" %></b>
+          <%= f.text_field :brand_name, class: "form-control", placeholder: "snowpeak" %>
+        </div>
+
+        <div class="form-group">
+          <b><%= f.label :category_id, "カテゴリ名" %></b>
+          <%= f.collection_select :category_id, @categories, :id, :name, include_blank: '選択してください', required: true %>
+        </div>
+
+        <div class="d-flex justify-content-around">
+          <%= f.submit "変更を保存", class: 'btn btn-success' %>
+          <% if (@gear.customer == current_customer) || admin_signed_in? %>
+          <%= link_to "キャンプギア情報削除", gear_path(@gear.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+          <% end %>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<%= render 'image_script' %>
