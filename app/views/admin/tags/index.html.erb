@@ -1,13 +1,13 @@
-<div class="container">
-  
+<div class="container px-5 my-5 px-sm-0 my-sm-0">
+
   <div class="row">
-    <h5 class='mx-5 my-3', style="background-color: #eee; width:220px; padding-left: 12px; margin-bottom: 40px;"><b>エリア・カテゴリ一覧</b></h5>
+    <h5 class='my-4 px-3', style="background-color: #eee; width:240px;"><b>エリア・カテゴリ一覧</b></h5>
   </div>
 
   <div class="row">
     <div class="col-md-6">
       <div class="d-flex justify-content-start">
-        <h5 class='mx-5 my-5', style="background-color: #eee; width:220px; padding-left: 12px; margin-bottom: 40px;"><b>エリア追加・一覧</b></h5>
+        <h5 class='mt-3 text-center', style="background-color: #eee; width:220px; margin-bottom: 40px;"><b>エリア追加・一覧</b></h5>
       </div>
       <div class="row d-flex justify-content-center">
         <%= render "admin/areas/form", resource: @area, model: @area, url: admin_areas_path, name: "エリア名", submit: "新規登録" %>
@@ -19,7 +19,7 @@
 
     <div class="col-md-6">
       <div class="d-flex justify-content-start">
-        <h5 class='mx-5 my-5', style="background-color: #eee; width:220px; padding-left: 12px; margin-bottom: 40px;"><b>カテゴリ追加・一覧</b></h5>
+        <h5 class='mt-3 text-center', style="background-color: #eee; width:220px; margin-bottom: 40px;"><b>カテゴリ追加・一覧</b></h5>
       </div>
       <div class="row d-flex justify-content-center">
         <%= render "admin/areas/form", resource: @category, model: @category, url: admin_categories_path, name: "カテゴリ名", submit: "新規登録" %>
