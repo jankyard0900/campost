@@ -1,9 +1,9 @@
 <div class="border border-dark text-center">
   <b>カテゴリ検索</b>
 </div>
-<div class="border border-dark">
+<div class="border border-dark text-center">
   <% categories.each do |category| %>
-    <p>
+    <p class="mt-1">
       <%= link_to gear_search_path(category_id: category.id) do %>
         <%= category.name %>
       <% end %>

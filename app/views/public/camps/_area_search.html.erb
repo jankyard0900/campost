@@ -1,9 +1,9 @@
 <div class="border border-dark text-center">
   <b>エリア検索</b>
 </div>
-<div class="border border-dark">
+<div class="border border-dark text-center">
   <% areas.each do |area| %>
-    <p>
+    <p class="mt-1">
       <%= link_to camp_search_path(area_id: area.id) do %>
         <%= area.name %>
       <% end %>
