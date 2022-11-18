@@ -6,7 +6,7 @@ class Camp < ApplicationRecord
   has_many :camp_reviews, dependent: :destroy
 
   validates :camp_images,        presence: true
-  validates :name,               presence: true, uniqueness: true
+  validates :name,               presence: true
   validates :address,            presence: true
   validates :access_method,      presence: true
   validates :parking,            presence: true

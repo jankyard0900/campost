@@ -6,7 +6,7 @@ class Gear < ApplicationRecord
   has_many :gear_reviews, dependent: :destroy
 
   validates :gear_images, presence: true
-  validates :name,        presence: true, uniqueness: true
+  validates :name,        presence: true
   validates :price,       presence: true
 
   scope :latest, -> {order(created_at: :desc)}
