@@ -1,69 +1,98 @@
-<h5>キャンプ場情報投稿</h5>
-<%= form_with model: @camp, url: camps_path, method: :post do |f| %>
-<table>
-  <% if @camp.errors.any? %>
-    <%= @camp.errors.count %>件のエラーが発生しました。
-    <ul>
-      <% @camp.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
+<div class="container  px-5 my-5 px-sm-0 my-sm-0">
+  <div class="row">
+    <h5 class="mt-5 text-center", style="background-color: #eee; width:220px; padding-left: 10px; margin-bottom: 40px;"><b>キャンプ場情報投稿</b></h5>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
 
-  <tr>
-    <td><b><%= f.label :camp_images, "キャンプ場の画像" %></b></td>
-    <td><%= f.file_field :camp_images, multiple: true, accept: "image/*" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :name, "キャンプ場名" %></b></td>
-    <td><%= f.text_field :name, class: "form-control", placeholder: "キャンプ場名" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :address, "住所" %></b></td>
-    <td><%= f.text_field :address, class: "form-control", placeholder: "〇〇県〇〇市〇〇-〇〇" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :area_id, "エリア名" %></b></td>
-    <td><%= f.collection_select :area_id, @areas, :id, :name, include_blank: '選択してください', required: true %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :access_method, "アクセス案内" %></b></td>
-    <td><%= f.text_area :access_method, class: "form-control", placeholder: "<車でお越しの方>国道〇〇号線を表示に従い30分" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :parking, "駐車場" %></b></td>
-    <td><%= f.text_area :parking, class: "form-control", placeholder: "駐車可能台数　８０台" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :vehicle, "乗り入れ可能車両" %></b></td>
-    <td><%= f.text_area :vehicle, class: "form-control", placeholder: "乗用車/自転車/バイク" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :close_facilities, "近隣施設" %></b></td>
-    <td><%= f.text_area :close_facilities, class: "form-control", placeholder: "スーパー/コンビニ" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :hot_spring, "近隣の温泉" %></b></td>
-    <td><%= f.text_area :hot_spring, class: "form-control", placeholder: "〇〇の湯" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :in_site_facilities, "場内施設" %></b></td>
-    <td><%= f.text_area :in_site_facilities, class: "form-control", placeholder: "炊事場/自動販売機/トイレ/バリアフリー" %></td>
-  </tr>
-  <tr>
-    <td><b><%= f.label :fee_information, "料金情報" %></b></td>
-    <td><%= f.text_area :fee_information, class: "form-control", placeholder: "オートサイト　１人3000円　フリーサイト　１人2000円　デイキャンプ　１人1500円" %></td>
-  </tr>
-  <tr>
-    <td><%= f.submit "キャンプ場投稿", class: 'btn btn-success' %></td>
-  </tr>
-</table>
-<% end %>
-  <img id="preview_0" style="width:15%;">
-  <img id="preview_1" style="width:15%;">
-  <img id="preview_2" style="width:15%;">
-  <img id="preview_3" style="width:15%;">
-  <img id="preview_4" style="width:15%;">
+    <%= form_with model: @camp, url: camps_path, method: :post do |f| %>
+
+      <% if @camp.errors.any? %>
+        <%= @camp.errors.count %>件のエラーが発生しました。
+        <ul>
+          <% @camp.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div class="form-group">
+        <b><%= f.label :camp_images, "キャンプ場の画像" %></b>
+        <%= f.file_field :camp_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+      </div>
+
+      <div>
+        <img id="preview_0" style="width:15%;">
+        <img id="preview_1" style="width:15%;">
+        <img id="preview_2" style="width:15%;">
+        <img id="preview_3" style="width:15%;">
+        <img id="preview_4" style="width:15%;">
+      </div>
+
+      <div class="form-group mt-2">
+        <b><%= f.label :name, "キャンプ場名" %></b>
+          <%= f.text_field :name, class: "form-control", placeholder: "キャンプ場名" %>
+      </div>
+
+      <div class="form-group">
+        <b><%= f.label :address, "住所" %></b>
+        <%= f.text_field :address, class: "form-control", placeholder: "〇〇県〇〇市〇〇-〇〇" %>
+      </div>
+
+      <div class="form-group">
+        <b><%= f.label :area_id, "エリア名" %></b>
+        <%= f.collection_select :area_id, @areas, :id, :name, include_blank: '選択してください', required: true %>
+      </div>
+
+      <div class="form-group">
+        <b><%= f.label :access_method, "アクセス案内" %></b>
+        <%= f.text_area :access_method, rows: 5, class: "form-control", placeholder: "<車でお越しの方>国道〇〇号線を表示に従い30分" %>
+      </div>
+
+      <div class="form-group">
+        <b><%= f.label :parking, "駐車場" %></b>
+        <%= f.text_area :parking, rows: 4, class: "form-control", placeholder: "駐車可能台数　８０台" %>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+    <div class="form-group">
+      <b><%= f.label :vehicle, "乗り入れ可能車両" %></b>
+      <%= f.text_area :vehicle, rows: 2, class: "form-control", placeholder: "乗用車/自転車/バイク" %>
+    </div>
+
+    <div class="form-group">
+      <b><%= f.label :close_facilities, "近隣施設" %></b>
+      <%= f.text_area :close_facilities, rows: 4, class: "form-control", placeholder: "スーパー/コンビニ" %>
+    </div>
+
+    <div class="form-group">
+      <b><%= f.label :hot_spring, "近隣の温泉" %></b>
+      <%= f.text_area :hot_spring, class: "form-control", placeholder: "〇〇の湯" %>
+    </div>
+
+    <div class="form-group">
+      <b><%= f.label :in_site_facilities, "場内施設" %></b>
+      <%= f.text_area :in_site_facilities, rows: 4, class: "form-control", placeholder: "炊事場/自動販売機/トイレ/バリアフリー" %>
+    </div>
+
+    <div class="form-group">
+      <b><%= f.label :fee_information, "料金情報" %></b>
+      <%= f.text_area :fee_information, rows: 4, class: "form-control", placeholder: "オートサイト　１人3000円　フリーサイト　１人2000円　デイキャンプ　１人1500円" %>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <%= f.submit "キャンプ場投稿", class: 'btn btn-success my-2' %>
+    </div>
+
+    <% end %>
+
+    </div>
+  </div>
+</div>
+
 <script>
 $('#camp_camp_images').on('change', function (e) {
 
