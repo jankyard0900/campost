@@ -1,95 +1,70 @@
-<div class="container">
+<div class="container px-5 my-5 px-sm-0 my-sm-0">
   <div class="row">
-    <h4><%= @gear.name %>をレビュー</h4>
+    <h4 class="mt-5 text-center", style="background-color: #eee; width:280px; padding-left: 8px; margin-bottom: 40px;"><b><%= @gear.name %>をレビュー</b></h4>
   </div>
-  <%= form_with model: [@gear, @gear_review], url: gear_gear_reviews_path(@gear), method: :post do |f| %>
-    <% if @gear_review.errors.any? %>
-      <%= @gear_review.errors.count %>件のエラーが発生しました。
-      <ul>
-        <% @gear_review.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7 co-12">
+
+      <%= form_with model: [@gear, @gear_review], url: gear_gear_reviews_path(@gear), method: :post do |f| %>
+        <% if @gear_review.errors.any? %>
+          <%= @gear_review.errors.count %>件のエラーが発生しました。
+          <ul>
+            <% @gear_review.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
         <% end %>
-      </ul>
-    <% end %>
-    <div>
-      <p><b><%= @gear.name %></b></p>
+
+        <div>
+          <h4><b><%= @gear.name %></b></h4>
+        </div>
+
+        <hr>
+
+        <h5><b><%= f.label :rate, "総合評価", class:'col-md-3 col-form-label' %></b></h5>
+        <div class="form-group" id="star">
+          <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
+        </div>
+        
+        <hr>
+        
+        <div class="form-group">
+          <b><%= f.label :review_gear_images, "キャンプギアの画像を追加する" %></b><br>
+          <p>※あれば写真を投稿してください（5枚まで)</p>
+          <%= f.file_field :review_gear_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+        </div>
+        
+        <div>
+          <img id="preview_0" style="width:15%;">
+          <img id="preview_1" style="width:15%;">
+          <img id="preview_2" style="width:15%;">
+          <img id="preview_3" style="width:15%;">
+          <img id="preview_4" style="width:15%;">
+        </div>
+        
+        <hr>
+        
+        <div class="form-group mt-2">
+          <b><%= f.label :title, "レビュータイトル" %></b>
+          <%= f.text_field :title, class: "form-control", placeholder: "伝えたいこと！" %>
+        </div>
+        
+        <hr>
+        
+        <div class="form-group">
+          <b><%= f.label :review, "レビュー" %></b>
+          <%= f.text_area :review, rows: 3, class: "form-control", placeholder: "「良かったこと」または「悪かったこと」" %>
+        </div>
+        
+        <hr>
+        
+        <div class="d-flex justify-content-end">
+          <%= f.submit "レビュー投稿", class: "btn btn-warning" %>
+        </div>
+      <% end %>
+      
     </div>
-    <hr>
-    <div class="form-group row" id="star">
-      <%= f.label :rate, "総合評価", class:'col-md-3 col-form-label' %>
-      <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
-    </div>
-    <hr>
-    <div>
-      <p><b>キャンプギアの画像を追加する</b><br>※あれば写真を投稿してください（5枚まで）</p>
-      <%= f.file_field :review_gear_images, multiple: true, accept: "image/*" %>
-    </div>
-    <hr>
-    <div>
-      <b><%= f.label :title, "レビュータイトル" %></b>
-      <%= f.text_field :title, class: "form-control", placeholder: "伝えたいこと！" %>
-    </div>
-    <hr>
-    <div>
-      <b><%= f.label :review, "レビュー" %></b>
-      <%= f.text_area :review, class: "form-control", placeholder: "「良かったこと」または「悪かったこと」" %>
-    </div>
-    <div>
-      <%= f.submit "レビュー投稿", class: "btn btn-warning" %>
-    </div>
-  <% end %>
-  <img id="preview_0" style="width:15%;">
-  <img id="preview_1" style="width:15%;">
-  <img id="preview_2" style="width:15%;">
-  <img id="preview_3" style="width:15%;">
-  <img id="preview_4" style="width:15%;">
+  </div>
 </div>
-<script>
-$(document).on('turbolinks:load', function() {
-  $('#star').empty();
-  $('#star').raty({
-    size     : 36,
-    starOff  : '<%= asset_path('star-off.png') %>',
-    starOn   : '<%= asset_path('star-on.png') %>',
-    starHalf: '<%=asset_path('star-half.png') %>',
-    scoreName: 'gear_review[rate]',
-    half: true,
-  });
-});
-$('#gear_review_review_gear_images').on('change', function (e) {
 
-    if(e.target.files.length > 5){
-
-      alert('一度に投稿できるのは五枚までです。');
-      // 五枚以上の画像を選択していた場合、選択したファイルをリセット。
-      $('#gear_review_review_gear_images').val("");
-
-      // 以前の画像のプレビューが残っていた場合は、
-      // まだ画像選択できていると勘違いを誘発するため初期化。
-      for( let i = 0; i < 5; i++) {
-        $(`#preview_${i}`).attr('src', "");
-      }
-
-    }else{
-      let reader = new Array(5);
-
-      // 画像選択を二回した時、一回目より数が少なかったりすると画面上に残るので初期化
-      for( let i = 0; i < 5; i++) {
-        $(`#preview_${i}`).attr('src', "");
-      }
-
-      for(let i = 0; i < e.target.files.length; i++) {
-        reader[i] = new FileReader();
-        reader[i].onload = finisher(i,e);
-        reader[i].readAsDataURL(e.target.files[i]);
-
-        // onloadは別関数で準備しないとfor文内では使用できないので、関数を準備。
-        function finisher(i,e){
-          return function(e){
-          $(`#preview_${i}`).attr('src', e.target.result);
-          }
-        }
-       }
-   }
-});
-</script>
+<%= render 'star_image' %>
