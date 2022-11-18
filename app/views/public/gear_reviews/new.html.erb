@@ -21,19 +21,19 @@
 
         <hr>
 
-        <h5><b><%= f.label :rate, "総合評価", class:'col-md-3 col-form-label' %></b></h5>
+        <h5><b><%= f.label :rate, "総合評価" %></b></h5>
         <div class="form-group" id="star">
           <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
         </div>
-        
+
         <hr>
-        
+
         <div class="form-group">
           <b><%= f.label :review_gear_images, "キャンプギアの画像を追加する" %></b><br>
           <p>※あれば写真を投稿してください（5枚まで)</p>
           <%= f.file_field :review_gear_images, multiple: true, accept: "image/*", class: "form-control-file" %>
         </div>
-        
+
         <div>
           <img id="preview_0" style="width:15%;">
           <img id="preview_1" style="width:15%;">
@@ -41,28 +41,28 @@
           <img id="preview_3" style="width:15%;">
           <img id="preview_4" style="width:15%;">
         </div>
-        
+
         <hr>
-        
+
         <div class="form-group mt-2">
           <b><%= f.label :title, "レビュータイトル" %></b>
           <%= f.text_field :title, class: "form-control", placeholder: "伝えたいこと！" %>
         </div>
-        
+
         <hr>
-        
+
         <div class="form-group">
           <b><%= f.label :review, "レビュー" %></b>
           <%= f.text_area :review, rows: 3, class: "form-control", placeholder: "「良かったこと」または「悪かったこと」" %>
         </div>
-        
+
         <hr>
-        
+
         <div class="d-flex justify-content-end">
           <%= f.submit "レビュー投稿", class: "btn btn-warning" %>
         </div>
       <% end %>
-      
+
     </div>
   </div>
 </div>
