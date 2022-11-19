@@ -13,16 +13,13 @@
   <div class="row">
     <div class="col-12 mb-2", style="text-align: center;">
       <% @camp.camp_images.each do |image| %>
-
         <%= image_tag image, style: "width: 18%;" %>
-
       <% end %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-12">
-
       <table>
         <tbody>
           <tr>
@@ -70,7 +67,6 @@
     </div>
   </div>
 
-
   <div class="row">
     <div class="col-12">
       <% if customer_signed_in? && (current_customer.name != "ゲストユーザー") %>
@@ -79,79 +75,65 @@
     </div>
   </div>
 
-
   <div class="row mt-3 mb-3">
     <div class="col-12">
       <h4 class="mt-5 text-center", style="background-color: #eee; width:220px; padding-left: 10px; margin-bottom: 40px;"><b>レビュー一覽</b></h4>
     </div>
   </div>
 
-
   <div class="row">
     <div class="col-12">
-
-    <ul style="list-style: none;">
-    <% @camp_reviews.each do |review| %>
-      <li>
-        <div class="review" style="margin-top: 20px; padding-bottom: 20px; border-bottom: 1px solid black;">
-          <div class="row">
-            <div class="col-4">
-              <%= image_tag review.customer.get_profile_image(100, 100), class: "rounded-circle" %>
-              <div>
-              <b><%= review.customer.name %></b>さん
-              </div>
-              <div id="star-rate<%= review.id%>"></div>
-              <script>
-              $(document).on('turbolinks:load', function() {
-                $('#star-rate<%= review.id %>').empty();
-                $('#star-rate<%= review.id%>').raty({
-                  size      : 36,
-                  starOff   : '<%= asset_path('star-off.png') %>',
-                  starOn    : '<%= asset_path('star-on.png') %>',
-                  starHalf  : '<%=asset_path('star-half.png') %>',
-                  half      : true,
-                  readOnly  : true,
-                  score: <%= review.rate %>,
+      <ul style="list-style: none;">
+      <% @camp_reviews.each do |review| %>
+        <li>
+          <div class="review" style="margin-top: 20px; padding-bottom: 20px; border-bottom: 1px solid black;">
+            <div class="row">
+              <div class="col-4">
+                <%= image_tag review.customer.get_profile_image(100, 100), class: "rounded-circle" %>
+                <div>
+                <b><%= review.customer.name %></b>さん
+                </div>
+                <div id="star-rate<%= review.id%>"></div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#star-rate<%= review.id %>').empty();
+                  $('#star-rate<%= review.id%>').raty({
+                    size      : 36,
+                    starOff   : '<%= asset_path('star-off.png') %>',
+                    starOn    : '<%= asset_path('star-on.png') %>',
+                    starHalf  : '<%=asset_path('star-half.png') %>',
+                    half      : true,
+                    readOnly  : true,
+                    score: <%= review.rate %>,
+                  });
                 });
-              });
-              </script>
+                </script>
+              </div>
+              <div class="col-8 mt-4">
+                <span><%= l review.created_at %></span>
+                <h4 style="margin-bottom: 8px;"><b><%= review.title %></b></h4>
+                <span><%= review.review %></span>
+              </div>
             </div>
 
-            <div class="col-8 mt-4">
-              <span><%= l review.created_at %></span>
-              <h4 style="margin-bottom: 8px;"><b><%= review.title %></b></h4>
-              <span><%= review.review %></span>
+            <div class="mt-2">
+              <% if (review.customer == current_customer) || admin_signed_in? %>
+                <%= link_to "レビュー削除", camp_camp_review_path(@camp.id, review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+              <% end %>
             </div>
 
-          </div>
-
-
-
-          <div class="mt-2">
-            <% if (review.customer == current_customer) || admin_signed_in? %>
-              <%= link_to "レビュー削除", camp_camp_review_path(@camp.id, review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+            <!--↓もし画像があれば横並びに表示する-->
+            <% if review.review_camp_images.attached? %>
+            <div class="mt-2 mb-2">
+              <% review.review_camp_images.each do |image| %>
+                <%= image_tag image, size:'100x100', style: "margin-bottom: 5px;" %>
+              <% end %>
+            </div>
             <% end %>
           </div>
-
-          <!--↓もし画像があれば横並びに表示する-->
-          <% if review.review_camp_images.attached? %>
-          <div class="mt-2 mb-2">
-            <% review.review_camp_images.each do |image| %>
-              <%= image_tag image, size:'100x100', style: "margin-bottom: 5px;" %>
-            <% end %>
-          </div>
-          <% end %>
-
-
-
-        </div>
-      </li>
-    <% end %>
-    </ul>
-
-
+        </li>
+      <% end %>
+      </ul>
     </div>
-
-
   </div>
 </div>
