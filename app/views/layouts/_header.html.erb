@@ -1,9 +1,6 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <!--管理者がログインしているとき-->
       <% if admin_signed_in? %>
         <h2>Camposts</h2>
@@ -13,38 +10,42 @@
           <font size="6">Camposts</font>
         <% end %>
       <% end %>
-      <div id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
           <!--管理者がログインしているとき-->
           <% if admin_signed_in? %>
-           <li><%= link_to "キャンプギア一覽", gears_path, class: "nav-link btn btn-outline-dark" %></li>
-           <li><%= link_to "キャンプ場一覽", camps_path, class: "nav-link btn btn-outline-dark" %></li>
-           <li><%= link_to "会員一覽", admin_customers_path, class: "nav-link btn btn-outline-dark" %></li>
-           <li><%= link_to "エリア・カテゴリ一覽", admin_tags_path, class: "nav-link btn btn-outline-dark" %></li>
-           <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-dark" %></li>
+           <li class="nav-item"><%= link_to "キャンプギア一覽", gears_path, class: "nav-link btn btn-outline-dark" %></li>
+           <li class="nav-item"><%= link_to "キャンプ場一覽", camps_path, class: "nav-link btn btn-outline-dark" %></li>
+           <li class="nav-item"><%= link_to "会員一覽", admin_customers_path, class: "nav-link btn btn-outline-dark" %></li>
+           <li class="nav-item"><%= link_to "エリア・カテゴリ一覽", admin_tags_path, class: "nav-link btn btn-outline-dark" %></li>
+           <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-dark" %></li>
           <!--会員がログインしているとき-->
           <% elsif customer_signed_in? && current_customer.name != "ゲストユーザー" %>
-            <li><%= link_to "キャンプギア一覽", gears_path, class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "キャンプギア投稿", new_gear_path, class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "キャンプ場一覽", camps_path, class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "キャンプ場投稿", new_camp_path, class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "キャンプギア一覽", gears_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "キャンプギア投稿", new_gear_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "キャンプ場一覽", camps_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "キャンプ場投稿", new_camp_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-outline-dark" %></li>
           <!--ゲストログインしているとき-->
           <% elsif customer_signed_in? && current_customer.name == "ゲストユーザー" %>
-            <li><%= link_to "キャンプギア一覽", gears_path, class: "btn btn-outline-dark" %></li>
-            <li><%= link_to "キャンプ場一覽", camps_path, class: "btn btn-outline-dark" %></li>
-            <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "キャンプギア一覽", gears_path, class: "btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "キャンプ場一覽", camps_path, class: "btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %></li>
           <!--ログインしてないとき-->
           <% else %>
-            <li><%= link_to "新規会員登録", new_customer_registration_path, class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "ゲストログイン", cusotmers_guest_sign_in_path, method: :post, class: "nav-link btn btn-outline-dark" %></li>
-            <li><%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "新規会員登録", new_customer_registration_path, class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "ゲストログイン", cusotmers_guest_sign_in_path, method: :post, class: "nav-link btn btn-outline-dark" %></li>
+            <li class="nav-item"><%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-outline-dark" %></li>
           <% end %>
         </ul>
         <!--検索窓-->
-        <ul class="navbar-nav">
-          <li class="nav-item ml-auto pr-3">
+        <ul class="navbar-nav pt-1 pr-3">
+          <li class="nav-item">
             <%= render 'public/searches/search' %>
           </li>
         </ul>
