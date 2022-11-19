@@ -2,10 +2,10 @@
   <div class="row">
     <h5 class="mt-5 text-center", style="background-color: #eee; width:220px; padding-left: 10px; margin-bottom: 40px;"><b>キャンプ場情報投稿</b></h5>
   </div>
+  <%= form_with model: @camp, url: camps_path, method: :post do |f| %>
   <div class="row">
     <div class="col-md-6">
 
-    <%= form_with model: @camp, url: camps_path, method: :post do |f| %>
 
       <% if @camp.errors.any? %>
         <%= @camp.errors.count %>件のエラーが発生しました。
@@ -88,10 +88,10 @@
       <%= f.submit "キャンプ場投稿", class: 'btn btn-success my-2' %>
     </div>
 
-    <% end %>
 
     </div>
   </div>
+  <% end %>
 </div>
 
 <%= render 'image_script' %>
