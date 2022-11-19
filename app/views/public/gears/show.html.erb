@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container px-sm-0 my-sm-0">
   <div class="row">
     <div class="col-md-6">
-      <h4>キャンプギア情報</h4>
+      <h4 class="mt-5 text-center", style="background-color: #eee; width:220px; margin-bottom: 40px;"><b>キャンプギア情報</b></h4>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 mt-5 mb-2">
     <% if (@gear.customer == current_customer) || admin_signed_in? %>
       <%= link_to "編集する", edit_gear_path(@gear.id), class: 'btn btn-success' %>
     <% end %>
@@ -11,91 +11,107 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-12 mb-2", style="text-align: center;">
       <% @gear.gear_images.each do |image| %>
-      <div class="my-5">
-        <%= image_tag image, size:'400x300' %>
-      </div>
+        <%= image_tag image, style: "width: 18%;" %>
       <% end %>
     </div>
+  </div>
 
-    <div class="col-md-6">
+  <div class="row">
+    <div class="col-12">
       <table>
-        <tr>
-          <td><%= image_tag @gear.customer.get_profile_image(100,100) %></td>
-          <td><%= @gear.customer.name %>さん</td>
-        </tr>
-        <tr>
-          <td><b>キャンプギア名</b></td>
-          <td><%= @gear.name %></td>
-        </tr>
-        <tr>
-          <td><b>値段</b></td>
-          <td><%= @gear.price %>円</td>
-        </tr>
-        <tr>
-          <td><b>ブランド名</b></td>
-          <td><%= @gear.brand_name %></td>
-        </tr>
-        <tr>
-          <td><b>カテゴリ名</b></td>
-          <td><%= @gear.category.name %></td>
-        </tr>
+        <tbody>
+          <tr>
+            <th style="padding: 12px 0; vertical-align: top;"><%= image_tag @gear.customer.get_profile_image(100,100), class: "rounded-circle" %></th>
+            <td><%= @gear.customer.name %>さん</td>
+          </tr>
+          <tr>
+            <th style="padding: 12px 0; vertical-align: top;"><b>キャンプギア名　</b></th>
+            <td style="padding: 12px 0; vertical-align: top;"><%= @gear.name %></td>
+          </tr>
+          <tr>
+            <th style="padding: 12px 0; vertical-align: top;"><b>値段</b></th>
+            <td style="padding: 12px 0; vertical-align: top;"><%= @gear.price %>円</td>
+          </tr>
+          <tr>
+            <th style="padding: 12px 0; vertical-align: top;"><b>ブランド名</b></th>
+            <td style="padding: 12px 0; vertical-align: top;"><%= @gear.brand_name %></td>
+          </tr>
+          <tr>
+            <th style="padding: 12px 0; vertical-align: top;"><b>カテゴリ名</b></th>
+            <td style="padding: 12px 0; vertical-align: top;"><%= @gear.category.name %></td>
+          </tr>
+        </tbody>
       </table>
-      <% if customer_signed_in? && (current_customer.name != "ゲストユーザー") %>
-        <%= link_to "キャンプギアレビューを書く >", new_gear_gear_review_path(@gear.id), class: "btn btn-secondary" %>
-      <% end %>
-      <h3>レビュー一覽</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= render "public/camps/review_btn", url: new_gear_gear_review_path(@gear.id) %>
+    </div>
+  </div>
+
+  <div class="row mt-3 mb-3">
+    <div class="col-12">
+      <h4 class="mt-5 text-center", style="background-color: #eee; width:220px; margin-bottom: 40px;"><b>レビュー一覽</b></h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <ul style="list-style: none;">
       <% @gear_reviews.each do |review| %>
-      <table>
-        <tr>
-          <td>
-            <%= image_tag review.customer.get_profile_image(100, 100) %>
-            <b><%= review.customer.name %></b>さん
-          </td>
-          <td>
-            <% if (review.customer == current_customer) || admin_signed_in? %>
-              <%= link_to "削除", gear_gear_review_path(@gear.id, review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+        <li>
+          <div class="review" style="margin-top: 20px; padding-bottom: 20px; border-bottom: 1px solid black;">
+            <div class="row">
+              <div class="col-4">
+                <%= image_tag review.customer.get_profile_image(100, 100), class: "rounded-circle" %>
+                <div class="customer-info">
+                  <b><%= review.customer.name %></b>さん
+                </div>
+                <div id="star-rate<%= review.id%>"></div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#star-rate<%= review.id %>').empty();
+                  $('#star-rate<%= review.id%>').raty({
+                    size      : 36,
+                    starOff   : '<%= asset_path('star-off.png') %>',
+                    starOn    : '<%= asset_path('star-on.png') %>',
+                    starHalf  : '<%=asset_path('star-half.png') %>',
+                    half      : true,
+                    readOnly  : true,
+                    score: <%= review.rate %>,
+                  });
+                });
+                </script>
+              </div>
+              <div class="col-8 mt-4">
+                <span><%= l review.created_at %></span>
+                <h4 style="margin-bottom: 8px;"><b><%= review.title %></b></h4>
+                <span><%= review.review %></span>
+              </div>
+            </div>
+  
+            <div class="mt-2">
+              <% if (review.customer == current_customer) || admin_signed_in? %>
+                <%= link_to "レビュー削除", gear_gear_review_path(@gear.id, review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+              <% end %>
+            </div>
+  
+            <!--↓もし画像があれば横並びに表示する-->
+            <% if review.review_gear_images.attached? %>
+            <div class="mt-2 mb-2">
+              <% review.review_gear_images.each do |image| %>
+                <%= image_tag image, size:'100x100', style: "margin-bottom: 5px;" %>
+              <% end %>
+            </div>
             <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div id="star-rate<%= review.id%>"></div>
-            <script>
-            $(document).on('turbolinks:load', function() {
-              $('#star-rate<%= review.id %>').empty();
-              $('#star-rate<%= review.id%>').raty({
-                size      : 36,
-                starOff   : '<%= asset_path('star-off.png') %>',
-                starOn    : '<%= asset_path('star-on.png') %>',
-                starHalf  : '<%=asset_path('star-half.png') %>',
-                half      : true,
-                readOnly  : true,
-                score: <%= review.rate %>,
-              });
-            });
-            </script>
-          </td>
-        </tr>
-        <tr>
-          <td><b><%= review.title %></b></td>
-        </tr>
-        <tr>
-          <td><%= review.review %></td>
-        </tr>
-        <!--↓もし画像があれば横並びに表示する-->
-        <% if review.review_gear_images.attached? %>
-        <tr>
-          <td>
-          <% review.review_gear_images.each do |image| %>
-            <%= image_tag image, size:'100x100' %>
-          <% end %>
-          </td>
-        </tr>
-        <% end %>
-      </table>
+          </div>
+        </li>
       <% end %>
+      </ul>
     </div>
   </div>
 </div>

@@ -1,0 +1,4 @@
+
+<% if customer_signed_in? && (current_customer.name != "ゲストユーザー") %>
+  <%= link_to "キャンプ場レビューを書く >", url, class: "btn btn-secondary" %>
+<% end %>
