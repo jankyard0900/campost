@@ -11,7 +11,7 @@ class Customer < ApplicationRecord
   has_many :gears,        dependent: :destroy
   has_many :gear_reviews, dependent: :destroy
 
-  validates :name, presence: true, length: { minimum: 1, maximum: 10 },
+  validates :name, presence: true, length: { minimum: 1, maximum: 10 }, uniqueness: true,
     format: {with:/\A[ぁ-んァ-ン一-龥]/,message: "は、ひらがな、カタカナ、漢字のどれかで入力して下さい"}
 
   def get_profile_image(width, height)
