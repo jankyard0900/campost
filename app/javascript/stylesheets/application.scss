@@ -2,3 +2,15 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import 'homes.scss';
 
+.notifications {
+  color: $white;
+  text-align: center;  
+
+  .notice {
+    background-color: lightBlue;
+  }
+
+  .alert {
+    background-color: red;
+  }
+}

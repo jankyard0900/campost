@@ -4,7 +4,7 @@ class Public::CampsController < ApplicationController
 
   def new
     if admin_signed_in?
-      redirect_to camps_path, notice: '管理者は投稿できません。'
+      redirect_to camps_path, alert: '管理者は投稿できません。'
     end
     @camp = Camp.new
     @areas = Area.all
@@ -17,6 +17,7 @@ class Public::CampsController < ApplicationController
       redirect_to camp_path(@camp.id), notice: 'キャンプ場が作成できました！'
     else
       @areas = Area.all
+      flash.now[:alert] = "作成できませんでした。もう一度やり直してください。"
       render :new
     end
   end
@@ -41,7 +42,7 @@ class Public::CampsController < ApplicationController
   def edit
     @camp = Camp.find(params[:id])
     unless (@camp.customer == current_customer) || admin_signed_in?
-      redirect_to camp_path(@camp.id), notice: '他のユーザーの投稿は編集できません。'
+      redirect_to camp_path(@camp.id), alert: '他のユーザーの投稿は編集できません。'
     end
     @areas = Area.all
   end
@@ -58,6 +59,7 @@ class Public::CampsController < ApplicationController
       redirect_to camp_path(@camp.id), notice: '投稿を変更しました。'
     else
       @areas = Area.all
+      flash.now[:alert] = "更新できませんでした。もう一度やり直してください。"
       render :edit
     end
   end
@@ -68,6 +70,7 @@ class Public::CampsController < ApplicationController
       redirect_to camps_path, notice: '投稿を削除しました。'
     else
       @areas = Area.all
+      flash.now[:alert] = "削除できませんでした。もう一度やり直してください。"
       render :edit
     end
   end

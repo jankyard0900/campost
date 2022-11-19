@@ -4,7 +4,7 @@ class Public::GearsController < ApplicationController
 
   def new
     if admin_signed_in?
-      redirect_to gears_path, notice: '管理者は投稿できません。'
+      redirect_to gears_path, alert: '管理者は投稿できません。'
     end
     @gear = Gear.new
     @categories = Category.all
@@ -17,6 +17,7 @@ class Public::GearsController < ApplicationController
       redirect_to gear_path(@gear.id), notice: 'キャンプギアが作成できました！'
     else
       @categories = Category.all
+      flash.now[:alert] = "作成できませんでした。もう一度やり直してください。"
       render :new
     end
   end
@@ -42,7 +43,7 @@ class Public::GearsController < ApplicationController
     @gear = Gear.find(params[:id])
     @categories = Category.all
     unless (@gear.customer == current_customer) || admin_signed_in?
-      redirect_to gear_path(@gear.id), notice: '他のユーザーの投稿は編集できません。'
+      redirect_to gear_path(@gear.id), alert: '他のユーザーの投稿は編集できません。'
     end
   end
 
@@ -52,6 +53,7 @@ class Public::GearsController < ApplicationController
       redirect_to gear_path(@gear.id), notice: '投稿を変更しました。'
     else
       @categories = Category.all
+      flash.now[:alert] = "更新できませんでした。もう一度やり直してください。"
       render :edit
     end
   end
@@ -62,6 +64,7 @@ class Public::GearsController < ApplicationController
       redirect_to gears_path, notice: '投稿を削除しました。'
     else
       @categories = Category.all
+      flash.now[:alert] = "削除できませんでした。もう一度やり直してください。"
       render :edit
     end
   end

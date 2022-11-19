@@ -5,7 +5,7 @@ class Public::CampReviewsController < ApplicationController
   def new
     @camp = Camp.find(params[:camp_id])
     if admin_signed_in?
-      redirect_to camp_path(@camp), notice: '管理者は投稿できません。'
+      redirect_to camp_path(@camp), alert: '管理者は投稿できません。'
     end
     @camp_review = CampReview.new
   end
@@ -17,6 +17,7 @@ class Public::CampReviewsController < ApplicationController
     if @camp_review.save
       redirect_to camp_path(@camp.id), notice: 'レビューを投稿しました。'
     else
+      flash.now[:alert] = "が投稿出来ませんでした。もう一度やり直してください。"
       render :new
     end
   end

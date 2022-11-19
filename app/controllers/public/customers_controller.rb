@@ -28,6 +28,7 @@ class Public::CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to customer_path(@customer), notice: '変更を保存しました！'
     else
+      flash.now[:alert] = "更新できませんでした。もう一度やり直してください。"
       render :edit
     end
   end
@@ -49,7 +50,7 @@ class Public::CustomersController < ApplicationController
   def ensure_correct_customer
     @customer =  Customer.find(params[:id])
     unless (@customer == current_customer)
-      redirect_to customer_path(current_customer), notice: '他のユーザーの画面は表示できません。'
+      redirect_to customer_path(current_customer), alert: '他のユーザーの画面は表示できません。'
     end
   end
 end
