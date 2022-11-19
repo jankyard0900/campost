@@ -136,7 +136,7 @@
           <% if review.review_camp_images.attached? %>
           <div class="mt-2 mb-2">
             <% review.review_camp_images.each do |image| %>
-              <%= image_tag image, size:'100x100' %>
+              <%= image_tag image, size:'100x100', style: "margin-bottom: 5px;" %>
             <% end %>
           </div>
           <% end %>
