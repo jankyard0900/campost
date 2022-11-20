@@ -23,9 +23,23 @@ ja:
         area: "エリア名"
         name: "キャンプ場名"
         camp_images: "キャンプ場画像"
+        address: "住所"
+        access_method: "アクセス案内"
+        parking: "駐車場"
+        vehicle: "乗り入れ可能車両"
+        close_facilities: "近隣施設"
+        hot_spring: "近隣の温泉"
+        in_site_facilities: "場内施設"
+        fee_information: "料金情報"
+      gear:
+        category: "カテゴリ名"
+        name: "キャンプギア名"
+        gear_images: "キャンプギア画像"
+        price: "値段"
       customer:
         name: "ニックネーム"
         email: "メールアドレス"
+        password: "パスワード"
   date:
     abbr_day_names:
     - 日
