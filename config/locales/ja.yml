@@ -13,7 +13,7 @@ ja:
       camp_review: "キャンプ場レビュー"
       gear: "キャンプギア"
       gear_review: "キャンプギアレビュー"
-      customer: "会員"
+      customer: "会員情報"
     attributes:
       area:
         name: "エリア名"
@@ -23,6 +23,9 @@ ja:
         area: "エリア名"
         name: "キャンプ場名"
         camp_images: "キャンプ場画像"
+      customer:
+        name: "ニックネーム"
+        email: "メールアドレス"
   date:
     abbr_day_names:
     - 日
