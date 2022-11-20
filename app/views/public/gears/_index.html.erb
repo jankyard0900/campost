@@ -1,0 +1,34 @@
+<% gears.each do |gear| %>
+<div class="col-md-4">
+  <div>
+    <!--投稿画像の一枚目表示-->
+    <%= link_to gear_path(gear.id) do %>
+      <% gear.gear_images.first(1).each do |image| %>
+        <%= image_tag image, style: "width:100%; height: 220px;" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <h5 style="margin-top: 20px;"><b><%= gear.name %></b></h5>
+    <!--レビューの平均☆表示予定-->
+    <div class="row">
+      <div id="star-rate<%= gear.id%>", style="padding-left: 15px;"></div>
+      <p style="margin-left: 10px; margin-top: 5px;">(<b><%= gear.gear_reviews.count %>件</b>)</p>
+    </div>
+    <script>
+    $(document).on('turbolinks:load', function() {
+      $('#star-rate<%= gear.id %>').empty();
+      $('#star-rate<%= gear.id%>').raty({
+        size      : 36,
+        starOff   : '<%= asset_path('star-off.png') %>',
+        starOn    : '<%= asset_path('star-on.png') %>',
+        starHalf  : '<%= asset_path('star-half.png') %>',
+        half      : true,
+        readOnly  : true,
+        score: '<%= gear.gear_reviews.average(:rate).to_f.round(1) %>',
+      });
+    });
+    </script>
+  </div>
+</div>
+<% end %>
