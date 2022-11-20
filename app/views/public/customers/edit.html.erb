@@ -25,6 +25,10 @@
         <b><%= f.label :profile_image, "プロフィール画像" %></b>
         <%= f.file_field :profile_image, accept: "image/*", class: "form-control-file" %>
       </div>
+      <!--プレビュー用のimgタグを準備。プレビューしてない時は出現しない。-->
+      <div>
+        <img id="preview" style="width: 40%;">
+      </div>
 
       <div class="mt-5 d-flex justify-content-around">
         <%= f.submit "編集内容を保存", class: 'btn btn-success' %>
@@ -36,3 +40,13 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('#customer_profile_image').on('change', function (e) {
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      $("#preview").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
+  });
+</script>
