@@ -7,12 +7,20 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
+      area: "エリア"
+      category: "カテゴリ"
       camp: "キャンプ場"
-      area: "エリア名"
+      camp_review: "キャンプ場レビュー"
+      gear: "キャンプギア"
+      gear_review: "キャンプギアレビュー"
+      customer: "会員"
     attributes:
+      area:
+        name: "エリア名"
+      category:
+        name: "カテゴリ名"
       camp:
-        area: "エリア"
-        #area_id: "エリア名"
+        area: "エリア名"
         name: "キャンプ場名"
         camp_images: "キャンプ場画像"
   date:

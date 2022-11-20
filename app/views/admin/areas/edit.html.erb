@@ -1,9 +1,20 @@
 <div class="container">
   <div class="row">
-    <h5 class='mx-5 my-5 text-center', style="background-color: #eee; width:200px; padding-left: 10px; margin-bottom: 40px;"><b>エリア編集</b></h5>
+    <h5 class='mx-5 my-5 text-center', style="background-color: #eee; width:200px; margin-bottom: 40px;"><b>エリア編集</b></h5>
   </div>
   <div class="row d-flex justify-content-center">
-    <%= render "form", resource: @area, model: @area, url: admin_area_path, name: "エリア名", submit: "変更を保存する" %>
-    <span class="mr-3"><%= link_to "戻る", admin_tags_path, class: "btn btn-info" %></span>
+    <%= render "admin/shared/error_messages", resource: @area %>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <%= form_with model: @area, url: admin_area_path do |f| %>
+    <div classs="form-group mb-2">
+      <b><%= f.label :name, "エリア名" %></b>
+      <%= f.text_field :name, size: 30 %>
+    </div>
+    <div class="row d-flex justify-content-around mt-3">
+      <%= f.submit "変更を保存する", class: 'btn btn-success' %>
+      <%= link_to "戻る", admin_tags_path, class: "btn btn-info" %>
+    </div>
+    <% end %>
   </div>
 </div>
