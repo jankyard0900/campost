@@ -6,26 +6,24 @@
 
     <div class='col-md-10 col-12'>
 
-        <div class="row pl-3">
-          <h3><b>キャンプギア一覧</b></h3>
-          <b style="padding-top: 10px; margin-bottom: 8px;">（全<%= @gears_all.count%>件）</b>
-        </div>
+      <div class="row pl-3">
+        <h3><b>キャンプギア一覧</b></h3>
+        <b style="padding-top: 10px; margin-bottom: 8px;">（全<%= @gears_all.count%>件）</b>
+      </div>
 
-        <div class="row">
-          <p>
-            <%= link_to '新しい順', gears_path(latest: "新着順") %>
-            | <%= link_to '評価の高い順', gears_path(star_count: "評価の高い順") %>
-          </p>
-        </div>
+      <div class="row pl-3">
+        <p>
+          <%= link_to '新しい順', gears_path(latest: "新着順") %>
+          | <%= link_to '評価の高い順', gears_path(star_count: "評価の高い順") %>
+        </p>
+      </div>
 
+      <div class = "row">
+        <%= render "index", gears: @gears %>
+      </div>
 
-        <div class = "row">
-          <%= render "index", gears: @gears %>
-        </div>
-
-        <div class="d-flex justify-content-center">
-          <%= paginate @gears %>
-        </div>
+      <div class="d-flex justify-content-center">
+        <%= paginate @gears %>
       </div>
     </div>
   </div>
