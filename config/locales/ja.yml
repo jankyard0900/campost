@@ -6,6 +6,20 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+      models:
+        gear:
+          attributes:
+            gear_images:
+              blank: を選択してください
+            category:
+              required: を選択してください
+        camp:
+          attributes:
+            camp_images:
+              blank: を選択してください
+            area:
+              required: を選択してください
+
     models:
       area: "エリア"
       category: "カテゴリ"
