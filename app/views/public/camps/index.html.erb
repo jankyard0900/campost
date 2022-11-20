@@ -5,7 +5,7 @@
     </div>
 
     <div class='col-md-10 col-12'>
-
+      
       <div class="row pl-3">
         <h3><strong>キャンプ場一覧</strong></h3>
         <strong style="padding-top: 10px; margin-bottom: 8px;">（全<%= @camps_all.count%>件）</strong>
@@ -19,40 +19,7 @@
       </div>
 
       <div class = "row">
-        <% @camps.each do |camp| %>
-        <div class="col-md-4">
-          <div>
-            <!--投稿画像の一枚目表示-->
-            <%= link_to camp_path(camp.id) do %>
-              <% camp.camp_images.first(1).each do |image| %>
-                <%= image_tag image, style: "width:100%; height: 220px;" %>
-              <% end %>
-            <% end %>
-          </div>
-          <div>
-            <h5 style="margin-top: 20px;"><b><%= camp.name %></b></h5>
-            <!--レビューの平均☆表示-->
-            <div class="row">
-              <div id="star-rate<%= camp.id%>", style="padding-left: 15px;"></div>
-              <p style="margin-left: 10px; margin-top: 5px;">(<b><%= camp.camp_reviews.count %>件</b>)</p>
-            </div>
-            <script>
-            $(document).on('turbolinks:load', function() {
-              $('#star-rate<%= camp.id %>').empty();
-              $('#star-rate<%= camp.id%>').raty({
-                size      : 36,
-                starOff   : '<%= asset_path('star-off.png') %>',
-                starOn    : '<%= asset_path('star-on.png') %>',
-                starHalf  : '<%= asset_path('star-half.png') %>',
-                half      : true,
-                readOnly  : true,
-                score: '<%= camp.camp_reviews.average(:rate).to_f.round(1) %>',
-              });
-            });
-            </script>
-          </div>
-        </div>
-        <% end %>
+        <%= render "index", camps: @camps %>
       </div>
 
       <div class="d-flex justify-content-center">
