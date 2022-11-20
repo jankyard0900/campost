@@ -36,6 +36,14 @@ ja:
         name: "キャンプギア名"
         gear_images: "キャンプギア画像"
         price: "値段"
+      camp_review:
+        rate: "総合評価"
+        title: "レビュータイトル"
+        review: "レビュー"
+      gear_review:
+        rate: "総合評価"
+        title: "レビュータイトル"
+        review: "レビュー"
       customer:
         name: "ニックネーム"
         email: "メールアドレス"
