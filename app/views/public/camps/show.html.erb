@@ -36,31 +36,31 @@
           </tr>
           <tr>
             <th style="padding: 12px 0; vertical-align: top;"><b>アクセス案内</b></th>
-            <td style="padding: 12px 0; vertical-align: top;"><%= @camp.access_method %></td>
+            <td style="padding: 12px 0; vertical-align: top;"><%= safe_join(@camp.access_method.split("\n"),tag(:br)) %></td>
           </tr>
           <tr>
             <th style="padding: 12px 0; vertical-align: top;"><b>駐車場</b></th>
-            <td style="padding: 12px 0; vertical-align: top;"><%= @camp.parking %></td>
+            <td style="padding: 12px 0; vertical-align: top;"><%= safe_join(@camp.parking.split("\n"),tag(:br)) %></td>
           </tr>
           <tr>
             <th style="padding: 12px 0; vertical-align: top;"><b>乗り入れ可能車両　</b></th>
-            <td style="padding: 12px 0; vertical-align: top;"><%= @camp.vehicle %></td>
+            <td style="padding: 12px 0; vertical-align: top;"><%= safe_join(@camp.vehicle.split("\n"),tag(:br)) %></td>
           </tr>
           <tr>
             <th style="padding: 12px 0; vertical-align: top;"><b>近隣施設</b></th>
-            <td style="padding: 12px 0; vertical-align: top;"><%= @camp.close_facilities %></td>
+            <td style="padding: 12px 0; vertical-align: top;"><%= safe_join(@camp.close_facilities.split("\n"),tag(:br)) %></td>
           </tr>
           <tr>
             <th style="padding: 12px 0; vertical-align: top;"><b>場内施設</b></th>
-            <td style="padding: 12px 0; vertical-align: top;"><%= @camp.in_site_facilities %></td>
+            <td style="padding: 12px 0; vertical-align: top;"><%= safe_join(@camp.in_site_facilities.split("\n"),tag(:br)) %></td>
           </tr>
           <tr>
             <th style="padding: 12px 0; vertical-align: top;"><b>近隣の温泉</b></th>
-            <td style="padding: 12px 0; vertical-align: top;"><%= @camp.hot_spring %></td>
+            <td style="padding: 12px 0; vertical-align: top;"><%= safe_join(@camp.hot_spring.split("\n"),tag(:br)) %></td>
           </tr>
           <tr>
             <th style="padding: 12px 0; vertical-align: top;"><b>料金情報</b></th>
-            <td style="padding: 12px 0; vertical-align: top;"><%= @camp.fee_information %></td>
+            <td style="padding: 12px 0; vertical-align: top;"><%= safe_join(@camp.fee_information.split("\n"),tag(:br)) %></td>
           </tr>
         </tbody>
       </table>
