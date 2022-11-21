@@ -27,7 +27,7 @@
         <div class="col-8 mt-4">
           <span><%= l review.created_at %></span>
           <h4 style="margin-bottom: 8px;"><b><%= review.title %></b></h4>
-          <span><%= review.review %></span>
+          <span><%= safe_join(review.review.split("\n"),tag(:br)) %></span>
         </div>
       </div>
 
