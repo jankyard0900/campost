@@ -32,7 +32,34 @@
       </table>
     </div>
 
-    <!--会員が投稿した場・ギア一覽-->
-    <%= render 'public/customers/camp', camps: @camps, gears: @gears %>
+    <div class="col-md-8">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h5 class="text-center" style="background-color: #eee; width:260px; margin-bottom: 40px;"><b>投稿したキャンプ場</b></h5>
+              <% @camps.each do |camp| %>
+              <div class="row mt-3 ml-3">
+                <%= link_to camp_path(camp.id), class: 'text-dark' do %>
+                  <u><%= camp.name %></u>
+                <% end %>
+              </div>
+              <hr>
+              <% end %>
+          </div>
+        <!--会員のキャンプギアレビュー一覽-->
+          <div class="col-sm-6">
+          <h5 class="text-center" style="background-color: #eee; width:260px; margin-bottom: 40px;"><b>投稿したキャンプギア</b></h5>
+            <% @gears.each do |gear| %>
+            <div class="row mt-3 ml-3">
+              <%= link_to gear_path(gear.id), class: 'text-dark' do %>
+                <u><%= gear.name %></u>
+              <% end %>
+            </div>
+            <hr>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
