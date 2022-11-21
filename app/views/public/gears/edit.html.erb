@@ -47,7 +47,8 @@
         </div>
 
         <div class="form-group">
-          <b><%= f.label :category_id, "カテゴリ名" %></b>
+          <b><%= f.label :category_id, "カテゴリ名" %></b><br>
+          <p>※選択肢にない場合はカテゴリなしを選択してください</p>
           <%= f.collection_select :category_id, @categories, :id, :name, include_blank: '選択してください', required: true %>
         </div>
 

@@ -3,7 +3,7 @@
     <h4 class="mt-5 text-center", style="padding-left: 8px; margin-bottom: 40px;"><b><%= @camp.name %>をレビュー</b></h4>
   </div>
   <div class="row d-flex justify-content-center">
-    <div class="col-md-7 co-12">
+    <div class="col-md-7">
 
       <%= form_with model: [@camp, @camp_review], url: camp_camp_reviews_path(@camp), method: :post do |f| %>
 

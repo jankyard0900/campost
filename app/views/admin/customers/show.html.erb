@@ -71,7 +71,7 @@
               <tr>
                 <td>
                   <div class="border-bottom">
-                    <%= review.review %>
+                    <%= safe_join(review.review.split("\n"),tag(:br)) %>
                   </div>
                 </td>
               </tr>
@@ -115,7 +115,7 @@
             <tr>
               <td>
                 <div class="border-bottom">
-                  <%= review.review %>
+                  <%= safe_join(review.review.split("\n"),tag(:br)) %>
                 </div>
               </td>
             </tr>
