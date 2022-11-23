@@ -17,7 +17,7 @@ class Public::CampReviewsController < ApplicationController
     if @camp_review.save
       redirect_to camp_path(@camp.id), notice: 'レビューを投稿しました。'
     else
-      flash.now[:alert] = "が投稿出来ませんでした。もう一度やり直してください。"
+      flash.now[:alert] = "投稿出来ませんでした。もう一度やり直してください。"
       render :new
     end
   end
