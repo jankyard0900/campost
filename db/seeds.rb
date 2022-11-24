@@ -7,15 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Admin.create!(
-  email: 'admin@admin',
-  password: 'adminadmin'
+  email: ENV['ADMIN_EMAIL'],
+  password: ENV['ADMIN_PASSWARD']
 )
 
 Customer.create!(
   id: 1,
-  name: 'テスト太郎',
-  email: 'test@test',
-  password: 'testtarou'
+  name: ENV['CUSTOMER'],
+  email: ENV['EMAIl'],
+  password: ENV['PASSWARD']
 )
 
 Category.create!(
