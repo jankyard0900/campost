@@ -21,6 +21,7 @@ ja:
               required: を選択してください
 
     models:
+      admin: "管理者"
       area: "エリア"
       category: "カテゴリ"
       camp: "キャンプ場"
@@ -29,6 +30,8 @@ ja:
       gear_review: "キャンプギアレビュー"
       customer: "会員情報"
     attributes:
+      admin:
+        email: "メールアドレス"
       area:
         name: "エリア名"
       category:
