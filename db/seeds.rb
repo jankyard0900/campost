@@ -17,3 +17,8 @@ Customer.create!(
   email: 'test@test',
   password: 'testtarou'
 )
+
+Category.create!(
+  id: 1,
+  name: 'カテゴリなし'
+)
