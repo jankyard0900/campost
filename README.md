@@ -1,24 +1,32 @@
-# README
+# <camp>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+みんなでキャンプ場の情報を投稿し、共有できる。
+また、おすすめのキャンプギアがあれば投稿し、みんなで共有できるレビューサイト。
 
-Things you may want to cover:
+### テーマを選んだ理由
+私がキャンプが好きで、キャンプのサイトを色々見てきて自分でもサイトを作りたいと思いこのテーマにしました。
+また、キャンプ場の情報を一から投稿できるサイトが少ないので、
+まだみんなに知られていないキャンプ場も気軽に共有できるのではないかと考えております。
 
-* Ruby version
+### ターゲットユーザ
+キャンプが好きな人、キャンプ初心者、キャンプに興味がある人
 
-* System dependencies
+### 主な利用シーン
+おすすめのキャンプ場を見つけた時/おすすめのキャンプギアを見つけた時に投稿する。
+どのようなキャンプ場があるのか/どのようなキャンプギアがあるのか気になった時。
 
-* Configuration
+## 設計書
 
-* Database creation
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
