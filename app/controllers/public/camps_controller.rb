@@ -66,11 +66,12 @@ class Public::CampsController < ApplicationController
 
   def destroy
     @camp = Camp.find(params[:id])
-    if @camp.destroy
+    if (@camp.customer == current_customer) || admin_signed_in?
+      @camp.destroy
       redirect_to camps_path, notice: '投稿を削除しました。'
     else
       @areas = Area.all
-      flash.now[:alert] = "削除できませんでした。もう一度やり直してください。"
+      flash.now[:alert] = "他のユーザの投稿を削除出来ません。"
       render :edit
     end
   end
