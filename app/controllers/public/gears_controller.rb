@@ -65,7 +65,7 @@ class Public::GearsController < ApplicationController
       redirect_to gears_path, notice: '投稿を削除しました。'
     else
       @categories = Category.all
-      flash.now[:alert] = "削除できませんでした。もう一度やり直してください。"
+      flash.now[:alert] = "他のユーザの投稿を削除出来ません。"
       render :edit
     end
   end
