@@ -23,8 +23,16 @@ class Public::CampReviewsController < ApplicationController
   end
 
   def destroy
-    CampReview.find(params[:id]).destroy
-    redirect_to request.referer, notice: 'レビューを削除しました。'
+    @camp_review = CampReview.find(params[:id])
+    if (@camp_review.customer == current_customer) || admin_signed_in?
+      @camp_review.destroy
+      redirect_to request.referer, notice: 'レビューを削除しました。'
+    else
+      @camp = @camp_review.camp
+      @camp_reviews = @camp.camp_reviews
+      flash.now[:alert] = "他のユーザのレビューは削除出来ません。"
+      render template: "public/camps/show"
+    end
   end
 
   private
