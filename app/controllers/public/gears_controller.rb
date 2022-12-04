@@ -60,7 +60,8 @@ class Public::GearsController < ApplicationController
 
   def destroy
     @gear = Gear.find(params[:id])
-    if @gear.destroy
+    if (@gear.customer == current_customer) || admin_signed_in?
+      @gear.destroy
       redirect_to gears_path, notice: '投稿を削除しました。'
     else
       @categories = Category.all
