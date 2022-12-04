@@ -23,8 +23,16 @@ class Public::GearReviewsController < ApplicationController
   end
 
   def destroy
-    GearReview.find(params[:id]).destroy
-    redirect_to request.referer, notice: 'レビューを削除しました。'
+    @gear_review = GearReview.find(params[:id])
+    if (@gear_review.customer == current_customer) || admin_signed_in?
+      @gear_review.destroy
+      redirect_to request.referer, notice: 'レビューを削除しました。'
+    else
+      @gear = @gear_review.gear
+      @gear_reviews = @gear.gear_reviews
+      flash.now[:alert] = "他のユーザのレビューは削除出来ません。"
+      render template: "public/gears/show"
+    end
   end
 
   private
